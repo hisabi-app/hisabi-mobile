@@ -1,6 +1,21 @@
+import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  final route = MaterialPageRoute(builder: (context) => HomePage());
+
+  final pages = [
+    DashboardPage(),
+    TransactionsPage(),
+    BrandsPage(),
+    CategoriesPage(),
+    SMSParserPage(),
+  ];
+
   final navigationBarItems = const [
     BottomNavigationBarItem(label: "Dashbord", icon: Icon(Icons.dashboard)),
     BottomNavigationBarItem(
@@ -20,6 +35,8 @@ class HomePage extends StatelessWidget {
         unselectedItemColor: Colors.blueGrey,
         onTap: (value) {
           print(value);
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => pages[value]));
         },
       ),
       body: Center(child: const Text("Home Page")),
