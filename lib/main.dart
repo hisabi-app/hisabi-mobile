@@ -1,4 +1,9 @@
+import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/home_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +22,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      routes: {
+        '/': (context) => HomePage(),
+        '/dashboard': (context) => DashboardPage(),
+        '/transactions': (context) => TransactionsPage(),
+        '/brands': (context) => BrandsPage(),
+        '/categories': (context) => CategoriesPage(),
+        '/sms_parser': (context) => SMSParserPage(),
+      },
     );
   }
 }
