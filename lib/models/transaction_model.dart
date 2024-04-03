@@ -1,4 +1,5 @@
 import 'package:cashify_mobile_flutter/models/brand_model.dart';
+import 'package:cashify_mobile_flutter/models/sms_model.dart';
 import 'package:equatable/equatable.dart';
 
 class TransactionModel extends Equatable {
@@ -34,6 +35,14 @@ class TransactionModel extends Equatable {
       amount: amount ?? this.amount,
       id: id ?? this.id,
     );
+  }
+
+  TransactionModel convertSmsToTranscation(SmsModel smsModel) {
+    return TransactionModel(
+        brand: BrandModel(brandName: smsModel.text, category: smsModel.text),
+        date: DateTime.now(),
+        amount: 0.333333333,
+        id: 3333333);
   }
 
   @override
