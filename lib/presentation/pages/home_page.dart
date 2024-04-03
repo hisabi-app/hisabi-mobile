@@ -5,8 +5,14 @@ import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final route = MaterialPageRoute(builder: (context) => HomePage());
+  Widget? _currentPage;
 
   final pages = [
     DashboardPage(),
@@ -25,6 +31,13 @@ class HomePage extends StatelessWidget {
     BottomNavigationBarItem(label: "Categories", icon: Icon(Icons.category)),
     BottomNavigationBarItem(label: "Parser", icon: Icon(Icons.translate)),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPage = DashboardPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +47,12 @@ class HomePage extends StatelessWidget {
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.blueGrey,
         onTap: (value) {
-          print(value);
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => pages[value]));
+          setState(() {
+            _currentPage = pages[value];
+          });
         },
       ),
-      body: Center(child: const Text("Home Page")),
+      body: Center(child: _currentPage),
     );
   }
 }
