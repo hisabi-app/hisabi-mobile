@@ -1,2 +1,2 @@
-# cashify-mobile-flutter
-A staging flutter replica of Cashify app
+# hisabi-mobile-flutter
+A staging flutter replica of hisabi app
