@@ -26,15 +26,15 @@ class SMSParserPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: height * 0.1,
+            height: height * 0.05,
           ),
           const Text("SMS Parser"),
           SizedBox(
-            height: height * 0.1,
+            height: height * 0.05,
           ),
           const Text("Lets try importing SMS for a start"),
           SizedBox(
-            height: height * 0.1,
+            height: height * 0.05,
           ),
           Expanded(
             child: FutureBuilder(

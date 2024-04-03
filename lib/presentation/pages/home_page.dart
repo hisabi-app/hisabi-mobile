@@ -4,6 +4,7 @@ import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,7 +43,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final logo = SvgPicture.asset(
+      height: height,
+      'assets/logo.svg',
+    );
     return Scaffold(
+      appBar: AppBar(leadingWidth: width * 0.95, leading: logo),
       bottomNavigationBar: BottomNavigationBar(
         items: navigationBarItems,
         showUnselectedLabels: true,
