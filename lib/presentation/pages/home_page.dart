@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final route = MaterialPageRoute(builder: (context) => HomePage());
-  Widget? _currentPage;
+  StatelessWidget? _currentPage;
 
   final pages = [
     DashboardPage(),
@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: pages.indexOf(_currentPage as StatelessWidget),
         items: navigationBarItems,
         showUnselectedLabels: true,
         selectedItemColor: Colors.black,
