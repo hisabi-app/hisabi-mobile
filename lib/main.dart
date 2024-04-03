@@ -5,8 +5,11 @@ import 'package:cashify_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
+import 'package:telephony/telephony.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
