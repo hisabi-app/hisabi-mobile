@@ -1,3 +1,4 @@
+import 'package:cashify_mobile_flutter/domain/sms_repository.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
@@ -31,7 +32,9 @@ class MyApp extends StatelessWidget {
         '/transactions': (context) => TransactionsPage(),
         '/brands': (context) => BrandsPage(),
         '/categories': (context) => CategoriesPage(),
-        '/sms_parser': (context) => SMSParserPage(),
+        '/sms_parser': (context) => SMSParserPage(
+              smsRepository: TelephonyRepository(),
+            ),
       },
     );
   }

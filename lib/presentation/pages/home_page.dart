@@ -1,3 +1,4 @@
+import 'package:cashify_mobile_flutter/domain/sms_repository.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     TransactionsPage(),
     BrandsPage(),
     CategoriesPage(),
-    SMSParserPage(),
+    SMSParserPage(smsRepository: TelephonyRepository()),
   ];
 
   final navigationBarItems = const [

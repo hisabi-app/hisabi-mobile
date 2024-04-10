@@ -1,21 +1,16 @@
+import 'package:cashify_mobile_flutter/domain/sms_repository.dart';
 import 'package:cashify_mobile_flutter/models/sms_model.dart';
 import 'package:flutter/material.dart';
 import 'package:telephony/telephony.dart';
 
 class SMSParserPage extends StatelessWidget {
-  final route = MaterialPageRoute(builder: (context) => SMSParserPage());
+  final route = MaterialPageRoute(
+      builder: (context) => SMSParserPage(
+            smsRepository: TelephonyRepository(),
+          ));
+  SMSParserPage({required this.smsRepository});
 
-  Future<List<SmsModel>> fetchSmsfromInbox() async {
-    final Telephony telephony = Telephony.instance;
-    bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
-    List<SmsMessage> messages = await telephony.getInboxSms();
-
-    List<SmsModel> smsModels = messages.map((message) {
-      return SmsModel(text: message.body ?? '');
-    }).toList();
-
-    return smsModels;
-  }
+  final SmsRepository smsRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +33,7 @@ class SMSParserPage extends StatelessWidget {
           ),
           Expanded(
             child: FutureBuilder(
-              future: fetchSmsfromInbox(),
+              future: smsRepository.fetchFromInbox(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator(); // Show loading indicator
