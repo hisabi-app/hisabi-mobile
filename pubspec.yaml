@@ -31,11 +31,15 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  dio: ^5.4.2+1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.10+1
+  mockito: ^5.4.4
   telephony: ^0.2.0
+  test: ^1.24.3
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -48,7 +52,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/logo.svg
-
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
