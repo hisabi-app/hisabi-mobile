@@ -3,6 +3,7 @@ import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/home_page.dart';
+import 'package:cashify_mobile_flutter/presentation/pages/landing_page.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
 import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => HomePage(),
+        '/': (context) => LandingPage(),
+        '/home': (context) => HomePage(),
         '/dashboard': (context) => DashboardPage(),
         '/transactions': (context) => TransactionsPage(),
         '/brands': (context) => BrandsPage(),
