@@ -30,24 +30,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cloud_firestore: ^4.14.0
   cupertino_icons: ^1.0.2
   dio: ^5.4.2+1
+  email_validator: ^2.1.17
   equatable: ^2.0.5
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.10+1
+  form_field_validator: ^1.1.0
   mockito: ^5.4.4
+  shared_preferences: ^2.2.2
   telephony: ^0.2.0
   test: ^1.24.3
-  shared_preferences: ^2.2.2
-  form_field_validator: ^1.1.0
-  email_validator: ^2.1.17
-  firebase_auth: ^4.16.0
-  firebase_core: ^2.24.2
-  cloud_firestore: ^4.14.0
-
-
-
 
 dev_dependencies:
   flutter_lints: ^2.0.0
