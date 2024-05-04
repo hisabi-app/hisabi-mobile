@@ -6,9 +6,11 @@ void main() {
     test('login', () async {
       // Arrange
       final repo = LoginWithApiRepo();
+      final realUserName = "";
+      final realPassword = "";
 
       // Act
-      final loginToken = await repo.login("admin@test.com", "admin123");
+      final loginToken = await repo.login(realUserName, realPassword);
 
       // Assert
       expect(loginToken, isNotEmpty); // Assert that loginToken is not empty
