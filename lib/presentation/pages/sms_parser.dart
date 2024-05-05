@@ -1,5 +1,5 @@
-import 'package:cashify_mobile_flutter/domain/sms_repository.dart';
-import 'package:cashify_mobile_flutter/data/models/sms_model.dart';
+import 'package:hisabi_mobile_flutter/domain/sms_repository.dart';
+import 'package:hisabi_mobile_flutter/data/models/sms_model.dart';
 import 'package:flutter/material.dart';
 import 'package:telephony/telephony.dart';
 

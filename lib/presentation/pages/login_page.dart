@@ -1,4 +1,4 @@
-import 'package:cashify_mobile_flutter/presentation/helper_widgets/login_form.dart';
+import 'package:hisabi_mobile_flutter/presentation/helper_widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {

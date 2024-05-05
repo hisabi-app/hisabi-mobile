@@ -1,21 +1,31 @@
-import 'package:cashify_mobile_flutter/domain/sms_repository.dart';
-import 'package:cashify_mobile_flutter/firebase_options.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/home_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/landing_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
+import 'package:hisabi_mobile_flutter/domain/sms_repository.dart';
+import 'package:hisabi_mobile_flutter/firebase_options.dart';
+import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
+import 'package:hisabi_mobile_flutter/presentation/cubit/app_state.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/brands_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/categories_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/landing_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/sms_parser.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:telephony/telephony.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (_) => AppCubit(
+        AppState.empty(),
+      ),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

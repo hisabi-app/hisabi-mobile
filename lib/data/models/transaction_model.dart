@@ -1,5 +1,5 @@
-import 'package:cashify_mobile_flutter/data/models/brand_model.dart';
-import 'package:cashify_mobile_flutter/data/models/sms_model.dart';
+import 'package:hisabi_mobile_flutter/data/models/brand_model.dart';
+import 'package:hisabi_mobile_flutter/data/models/sms_model.dart';
 import 'package:equatable/equatable.dart';
 
 class TransactionModel extends Equatable {

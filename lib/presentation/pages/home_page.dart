@@ -1,9 +1,9 @@
-import 'package:cashify_mobile_flutter/domain/sms_repository.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/brands_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/categories_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/dashboard_page.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/sms_parser.dart';
-import 'package:cashify_mobile_flutter/presentation/pages/transactions_page.dart';
+import 'package:hisabi_mobile_flutter/domain/sms_repository.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/brands_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/categories_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/sms_parser.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

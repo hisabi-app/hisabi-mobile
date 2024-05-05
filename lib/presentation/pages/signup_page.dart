@@ -1,4 +1,4 @@
-import 'package:cashify_mobile_flutter/presentation/pages/home_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:email_validator/email_validator.dart' as EmailValidator2;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

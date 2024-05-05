@@ -1,7 +1,7 @@
-import 'package:cashify_mobile_flutter/domain/brands_repository.dart';
-import 'package:cashify_mobile_flutter/domain/categories_repository.dart';
+import 'package:hisabi_mobile_flutter/domain/brands_repository.dart';
+import 'package:hisabi_mobile_flutter/domain/categories_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cashify_mobile_flutter/domain/transactions_repository.dart';
+import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
 
 void main() {
   group('AllCategoriesRepo', () {

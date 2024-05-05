@@ -1,4 +1,7 @@
-import 'package:cashify_mobile_flutter/presentation/pages/home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hisabi_mobile_flutter/domain/login_repository.dart';
+import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -16,10 +19,11 @@ class SignInForm extends StatelessWidget {
         errorText: 'passwords must have at least one special character')
   ]);
 
-  Future update() async {
+  Future update(String token) async {
     sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences!.setString('email', emailController.text);
     sharedPreferences!.setString('password', passwordController.text);
+    sharedPreferences!.setString('token', token);
   }
 
   @override
@@ -55,22 +59,20 @@ class SignInForm extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  final credential =
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                    email: emailController.text,
-                    password: passwordController.text,
+                  final loginRepo =
+                      LoginWithApiRepo(); // Instantiate the login repository
+                  final token = await loginRepo.login(
+                    emailController.text,
+                    passwordController.text,
                   );
-                  update();
+                  update(token);
+                  final oldState = context.read<AppCubit>().state;
+                  context.read<AppCubit>().updateState(
+                      oldState.copyWith(isLoggedIn: true, token: token));
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
                     return HomePage();
                   }));
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'user-not-found') {
-                    print('No user found for that email.');
-                  } else if (e.code == 'wrong-password') {
-                    print('Wrong password provided for that user.');
-                  }
                 } catch (e) {
                   print(e);
                 }

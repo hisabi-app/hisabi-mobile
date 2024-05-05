@@ -1,13 +1,13 @@
-import 'package:cashify_mobile_flutter/domain/brands_repository.dart';
+import 'package:hisabi_mobile_flutter/domain/brands_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cashify_mobile_flutter/domain/transactions_repository.dart';
+import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
 
 void main() {
   group('AllBrandsRepo', () {
     test('getBrands all, with valid token', () async {
       // Arrange
       final repo = AllBrandsRepo();
-      final token = "";
+      final token = "30|Oid2XwMfiEiiXFukOnMybN7lb0P4UR5mTkpYdOyk42a8f959";
 
       // Act
       final brands = await repo.getBrands(token, "");
