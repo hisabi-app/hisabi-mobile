@@ -37,6 +37,15 @@ class TransactionModel extends Equatable {
     );
   }
 
+  factory TransactionModel.fromJson(Map<String, dynamic> json) {
+    return TransactionModel(
+      brand: json['brand'],
+      date: json['date'],
+      amount: json['amount'],
+      id: json['id'],
+    );
+  }
+
   TransactionModel convertSmsToTranscation(SmsModel smsModel) {
     return TransactionModel(
       brand: BrandModel(

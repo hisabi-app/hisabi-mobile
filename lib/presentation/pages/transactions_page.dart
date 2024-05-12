@@ -72,7 +72,7 @@ class TransactionsPage extends StatelessWidget {
                                 width: width * 0.02,
                               ),
                               Container(
-                                width: width * 0.18,
+                                width: width * 0.1,
                                 child: Text("BRAND"),
                               ),
                               SizedBox(
@@ -105,16 +105,17 @@ class TransactionsPage extends StatelessWidget {
                                     itemCount: snapshot.data?.length,
                                     itemBuilder: (context, index) {
                                       final data = snapshot.data;
-                                      final category = data![index];
+                                      final transaction = data![index];
                                       return Center(
                                         child: Row(
                                           children: [
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
-                                            // Container(
-                                            //     width: width * 0.1,
-                                            //     child: Text(category.id)),
+                                            Container(
+                                                width: width * 0.1,
+                                                child: Text(
+                                                    transaction.id.toString())),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
