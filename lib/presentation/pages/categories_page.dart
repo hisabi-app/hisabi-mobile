@@ -64,7 +64,7 @@ class CategoriesPage extends StatelessWidget {
                                     itemCount: snapshot.data?.length,
                                     itemBuilder: (context, index) {
                                       final data = snapshot.data;
-                                      final brand = data![index];
+                                      final category = data![index];
                                       return Center(
                                         child: Row(
                                           children: [
@@ -73,25 +73,25 @@ class CategoriesPage extends StatelessWidget {
                                             ),
                                             Container(
                                                 width: width * 0.1,
-                                                child: Text(
-                                                    brand.brandId.toString())),
+                                                child:
+                                                    Text(category..toString())),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
-                                            Container(
-                                              width: width * 0.3,
-                                              child: Text(
-                                                brand.brandName,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: width * 0.05,
-                                            ),
-                                            Container(
-                                              width: width * 0.2,
-                                              child:
-                                                  Text(brand.category["name"]),
-                                            )
+                                            // Container(
+                                            //   width: width * 0.3,
+                                            //   child: Text(
+                                            //     category.categoryName,
+                                            //   ),
+                                            // ),
+                                            // SizedBox(
+                                            //   width: width * 0.05,
+                                            // ),
+                                            // Container(
+                                            //   width: width * 0.2,
+                                            //   child:
+                                            //       Text(category.category["name"]),
+                                            // )
                                           ],
                                         ),
                                       );

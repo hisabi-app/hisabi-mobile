@@ -53,8 +53,39 @@ class BrandsPage extends StatelessWidget {
                           SizedBox(
                             width: width * 0.1,
                           ),
+                          SizedBox(
+                            height: height * 0.1,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(width: width * 0.1, child: Text("ID")),
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(
+                                width: width * 0.3,
+                                child: Text("NAME"),
+                              ),
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(
+                                width: width * 0.2,
+                                child: Text("CATEGORY"),
+                              ),
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(
+                                width: width * 0.2,
+                                child: Text("Count"),
+                              ),
+                            ],
+                          ),
                           Container(
-                            margin: EdgeInsets.only(top: height * 0.05),
                             height: height * 0.45,
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -92,7 +123,16 @@ class BrandsPage extends StatelessWidget {
                                               width: width * 0.2,
                                               child:
                                                   Text(brand.category["name"]),
-                                            )
+                                            ),
+                                            SizedBox(
+                                              width: width * 0.05,
+                                            ),
+                                            Container(
+                                              width: width * 0.2,
+                                              child: Text(brand
+                                                  .transactionsCount
+                                                  .toString()),
+                                            ),
                                           ],
                                         ),
                                       );

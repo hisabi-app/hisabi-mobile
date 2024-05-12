@@ -39,7 +39,11 @@ class TransactionModel extends Equatable {
 
   TransactionModel convertSmsToTranscation(SmsModel smsModel) {
     return TransactionModel(
-      brand: BrandModel(brandName: smsModel.text, category: Map(), brandId: ""),
+      brand: BrandModel(
+          brandName: smsModel.text,
+          category: Map(),
+          brandId: "",
+          transactionsCount: 0),
       date: DateTime.now(),
       amount: 0.333333333,
       id: 3333333,
