@@ -1,28 +1,40 @@
 import 'package:equatable/equatable.dart';
 
 class BrandModel extends Equatable {
-  const BrandModel({
+  BrandModel({
     required this.brandName,
     required this.category,
+    required this.brandId,
   });
 
   final String brandName;
-  final String category;
+  final Map<String, dynamic> category;
+  final String brandId;
 
   factory BrandModel.empty() {
-    return const BrandModel(brandName: "", category: "");
+    return BrandModel(brandName: "", category: {"": ""}, brandId: "");
   }
 
   BrandModel copyWith({
     String? brandName,
-    String? category,
+    Map<String, dynamic>? category,
+    String? brandId,
   }) {
     return BrandModel(
       brandName: brandName ?? this.brandName,
       category: category ?? this.category,
+      brandId: brandId ?? this.brandId,
     );
   }
 
   @override
   List<Object?> get props => [brandName, category];
+
+  factory BrandModel.fromJson(Map<String, dynamic> json) {
+    return BrandModel(
+      brandName: json['name'] as String,
+      category: json['category'],
+      brandId: json['id'],
+    );
+  }
 }
