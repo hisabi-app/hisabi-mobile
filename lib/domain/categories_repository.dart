@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:hisabi_mobile_flutter/data/models/category_model.dart';
 
 abstract class CategoriesRepo {
   Future<dynamic> getCategories(String token, String query);
@@ -8,24 +9,23 @@ class AllCategoriesRepo implements CategoriesRepo {
   Dio dio = Dio();
 
   @override
-  Future<String> getCategories(String token, String query) async {
-    String categories = "";
+  Future<List<CategoryModel>> getCategories(String token, String query) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
-      await dio
-          .post(
-            "https://finance-demo.saleem.dev/graphql",
-            data: {
-              "query": "query {  allCategories {  id  name  type  color}}"
-            },
-            options: options,
-          )
-          .then((value) => categories = value.toString());
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {"query": "query {  allCategories {  id  name  type  color}}"},
+        options: options,
+      );
+
+      final jsonData = response.data["data"]["allCategories"];
+      List<CategoryModel> categories = List<CategoryModel>.from(
+          jsonData.map((x) => CategoryModel.fromJson(x)));
+      return categories;
     } catch (e) {
       print(e.toString());
+      return [];
     }
-    print(categories);
-    return categories;
   }
 }
 
