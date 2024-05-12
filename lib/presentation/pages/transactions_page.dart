@@ -72,7 +72,7 @@ class TransactionsPage extends StatelessWidget {
                                 width: width * 0.02,
                               ),
                               Container(
-                                width: width * 0.1,
+                                width: width * 0.15,
                                 child: Text("BRAND"),
                               ),
                               SizedBox(
@@ -114,15 +114,26 @@ class TransactionsPage extends StatelessWidget {
                                             ),
                                             Container(
                                                 width: width * 0.1,
-                                                child: Text(
-                                                    transaction.id.toString())),
+                                                child: Text(transaction.id)),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
-                                            // Container(
-                                            //   width: width * 0.3,
-                                            //   child: Text(category.name),
-                                            // ),
+                                            Container(
+                                              width: width * 0.3,
+                                              child: Text(transaction.amount
+                                                  .toString()),
+                                            ),
+
+                                            Container(
+                                              width: width * 0.05,
+                                              child: Text(transaction
+                                                  .brand.category.name),
+                                            ),
+                                            Container(
+                                              width: width * 0.3,
+                                              child: Text(
+                                                  transaction.date.toString()),
+                                            ),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),

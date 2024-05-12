@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:hisabi_mobile_flutter/data/models/brand_model.dart';
+import 'package:hisabi_mobile_flutter/data/models/category_model.dart';
 import 'package:hisabi_mobile_flutter/data/models/sms_model.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,7 +11,7 @@ class TransactionModel extends Equatable {
     required this.amount,
     required this.id,
   });
-  final int id;
+  final String id;
   final BrandModel brand;
   final DateTime date;
   final double amount;
@@ -19,12 +21,12 @@ class TransactionModel extends Equatable {
       brand: BrandModel.empty(),
       date: DateTime(0, 0, 0),
       amount: 0.0,
-      id: 0,
+      id: "",
     );
   }
 
   TransactionModel copyWith({
-    int? id,
+    String? id,
     BrandModel? brand,
     DateTime? date,
     double? amount,
@@ -39,26 +41,35 @@ class TransactionModel extends Equatable {
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return TransactionModel(
-      brand: json['brand'],
-      date: json['date'],
-      amount: json['amount'],
+      brand: BrandModel(
+          brandName: json['brand']['name'],
+          category: CategoryModel(
+              id: "",
+              name: json['brand']['category']['name'],
+              color: "",
+              type: ""),
+          brandId: json['brand']['id'],
+          transactionsCount: 0),
+      date: DateTime.parse(json['created_at']),
+      amount: (json['amount'] as num).toDouble(),
       id: json['id'],
     );
   }
 
-  TransactionModel convertSmsToTranscation(SmsModel smsModel) {
-    return TransactionModel(
-      brand: BrandModel(
-          brandName: smsModel.text,
-          category: Map(),
-          brandId: "",
-          transactionsCount: 0),
-      date: DateTime.now(),
-      amount: 0.333333333,
-      id: 3333333,
-    );
-  }
+  // TransactionModel convertSmsToTranscation(SmsModel smsModel) {
+  //   return TransactionModel(
+  //     brand: BrandModel(
+  //         brandName: smsModel.text,
+  //         category: Map(),
+  //         brandId: "",
+  //         transactionsCount: 0),
+  //     date: DateTime.now(),
+  //     amount: 0.333333333,
+  //     id: 3333333,
+  //   );
+  // }
 
   @override
-  List<Object?> get props => [id, brand, date, amount];
+  List<Object?> get props => [id, amount, date, brand];
+  // , brand, date, amount
 }

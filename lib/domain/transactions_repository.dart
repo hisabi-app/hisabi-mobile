@@ -9,8 +9,7 @@ class AllTransactionsRepo implements TransactionsRepo {
   Dio dio = Dio();
 
   @override
-  Future<List<TransactionModel>> getTransactions(
-      String token, String query) async {
+  Future<dynamic> getTransactions(String token, String query) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -21,7 +20,8 @@ class AllTransactionsRepo implements TransactionsRepo {
         },
         options: options,
       );
-      final jsonData = response.data["data"]["allTransactions"];
+      final jsonData = response.data["data"]["transactions"]["data"];
+      print(jsonData);
       List<TransactionModel> transactions = List<TransactionModel>.from(
           jsonData.map((x) => TransactionModel.fromJson(x)));
       return transactions;

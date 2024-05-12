@@ -11,6 +11,7 @@ class BrandsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
+    print(token);
     final brands = allBrandsRepo.getBrands(token, "");
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -121,8 +122,7 @@ class BrandsPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: width * 0.2,
-                                              child:
-                                                  Text(brand.category["name"]),
+                                              child: Text(brand.category.name),
                                             ),
                                             SizedBox(
                                               width: width * 0.05,

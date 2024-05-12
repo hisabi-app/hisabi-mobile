@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hisabi_mobile_flutter/data/models/category_model.dart';
 
 class BrandModel extends Equatable {
   BrandModel({
@@ -9,18 +10,21 @@ class BrandModel extends Equatable {
   });
 
   final String brandName;
-  final Map<String, dynamic> category;
+  final CategoryModel category;
   final String brandId;
   final int transactionsCount;
 
   factory BrandModel.empty() {
     return BrandModel(
-        brandName: "", category: {"": ""}, brandId: "", transactionsCount: 0);
+        brandName: "",
+        category: CategoryModel.empty(),
+        brandId: "",
+        transactionsCount: 0);
   }
 
   BrandModel copyWith({
     String? brandName,
-    Map<String, dynamic>? category,
+    CategoryModel? category,
     String? brandId,
     int? transactionsCount,
   }) {
@@ -38,7 +42,7 @@ class BrandModel extends Equatable {
   factory BrandModel.fromJson(Map<String, dynamic> json) {
     return BrandModel(
       brandName: json['name'] as String,
-      category: json['category'],
+      category: CategoryModel.empty().copyWith(name: json['category']['name']),
       brandId: json['id'],
       transactionsCount: json['transactionsCount'],
     );
