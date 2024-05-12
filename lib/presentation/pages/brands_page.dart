@@ -82,7 +82,7 @@ class BrandsPage extends StatelessWidget {
                               ),
                               Container(
                                 width: width * 0.2,
-                                child: Text("Count"),
+                                child: Text("Tr. Count"),
                               ),
                             ],
                           ),

@@ -62,7 +62,7 @@ class TransactionsPage extends StatelessWidget {
                               ),
                               Container(width: width * 0.05, child: Text("ID")),
                               SizedBox(
-                                width: width * 0.05,
+                                width: width * 0.02,
                               ),
                               Container(
                                 width: width * 0.2,
@@ -76,7 +76,7 @@ class TransactionsPage extends StatelessWidget {
                                 child: Text("BRAND"),
                               ),
                               SizedBox(
-                                width: width * 0.005,
+                                width: width * 0.05,
                               ),
                               Container(
                                 width: width * 0.2,
@@ -113,34 +113,38 @@ class TransactionsPage extends StatelessWidget {
                                               width: width * 0.05,
                                             ),
                                             Container(
-                                                width: width * 0.1,
+                                                width: width * 0.07,
                                                 child: Text(transaction.id)),
-                                            SizedBox(
-                                              width: width * 0.05,
-                                            ),
                                             Container(
-                                              width: width * 0.3,
+                                              margin: EdgeInsets.only(left: 0),
+                                              width: width * 0.15,
                                               child: Text(transaction.amount
                                                   .toString()),
                                             ),
-
                                             Container(
-                                              width: width * 0.05,
-                                              child: Text(transaction
-                                                  .brand.category.name),
+                                              width: width * 0.25,
+                                              child: Text(
+                                                  transaction.brand.brandName),
+                                            ),
+                                            SizedBox(
+                                              width: width * 0.02,
                                             ),
                                             Container(
-                                              width: width * 0.3,
-                                              child: Text(
-                                                  transaction.date.toString()),
+                                              width: width * 0.17,
+                                              child: Text(transaction
+                                                  .brand.category.name),
                                             ),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
-                                            // Container(
-                                            //   width: width * 0.2,
-                                            //   child: Text(category.type),
-                                            // )
+                                            Container(
+                                              width: width * 0.19,
+                                              child: Text(
+                                                transaction.date
+                                                    .toString()
+                                                    .substring(0, 10),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       );
@@ -151,7 +155,8 @@ class TransactionsPage extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                              onPressed: () {}, child: Text("CREATE CATEGORY")),
+                              onPressed: () {},
+                              child: const Text("CREATE TRANSACTION")),
                         ],
                       ),
                     );
