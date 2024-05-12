@@ -81,7 +81,6 @@ class CategoriesPage extends StatelessWidget {
                             ],
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: height * 0.05),
                             height: height * 0.45,
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -101,23 +100,20 @@ class CategoriesPage extends StatelessWidget {
                                             ),
                                             Container(
                                                 width: width * 0.1,
-                                                child:
-                                                    Text(category.toString())),
+                                                child: Text(category.id)),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
                                             Container(
                                               width: width * 0.3,
-                                              child: Text(
-                                                  " category.categoryName,"),
+                                              child: Text(category.name),
                                             ),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
                                             Container(
                                               width: width * 0.2,
-                                              child:
-                                                  Text(" category.category[]"),
+                                              child: Text(category.type),
                                             )
                                           ],
                                         ),
@@ -129,7 +125,7 @@ class CategoriesPage extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                              onPressed: () {}, child: Text("CREATE BRAND")),
+                              onPressed: () {}, child: Text("CREATE CATEGORY")),
                         ],
                       ),
                     );
