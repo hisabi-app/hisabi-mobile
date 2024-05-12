@@ -52,6 +52,34 @@ class CategoriesPage extends StatelessWidget {
                           SizedBox(
                             width: width * 0.1,
                           ),
+                          SizedBox(
+                            height: height * 0.1,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(width: width * 0.1, child: Text("ID")),
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(
+                                width: width * 0.3,
+                                child: Text("NAME"),
+                              ),
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                              Container(
+                                width: width * 0.2,
+                                child: Text("TYPE"),
+                              ),
+                              SizedBox(
+                                width: width * 0.05,
+                              ),
+                            ],
+                          ),
                           Container(
                             margin: EdgeInsets.only(top: height * 0.05),
                             height: height * 0.45,
@@ -74,24 +102,23 @@ class CategoriesPage extends StatelessWidget {
                                             Container(
                                                 width: width * 0.1,
                                                 child:
-                                                    Text(category..toString())),
+                                                    Text(category.toString())),
                                             SizedBox(
                                               width: width * 0.05,
                                             ),
-                                            // Container(
-                                            //   width: width * 0.3,
-                                            //   child: Text(
-                                            //     category.categoryName,
-                                            //   ),
-                                            // ),
-                                            // SizedBox(
-                                            //   width: width * 0.05,
-                                            // ),
-                                            // Container(
-                                            //   width: width * 0.2,
-                                            //   child:
-                                            //       Text(category.category["name"]),
-                                            // )
+                                            Container(
+                                              width: width * 0.3,
+                                              child: Text(
+                                                  " category.categoryName,"),
+                                            ),
+                                            SizedBox(
+                                              width: width * 0.05,
+                                            ),
+                                            Container(
+                                              width: width * 0.2,
+                                              child:
+                                                  Text(" category.category[]"),
+                                            )
                                           ],
                                         ),
                                       );
