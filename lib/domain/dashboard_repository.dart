@@ -3,32 +3,373 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 main() async {
-  final token = "";
-  final repo = IncomePerCategoryRepo();
+  final token = "25|wYANwyf6RsxUS3rvkwHS5BwPBieuzCBij3Ho1ZUI8e08e6a1";
+  final repo = FinanceVisualizationCirclePackMetricRepo();
 
-  final result = await repo.getQuery(token, "current-year");
+  final result = await repo.getQuery(token, "current-year", 0);
   print(result);
 }
 
 abstract class DashboardRepo {
-  Future<dynamic> getQuery(String token, range);
-  // Future<String> getTotalPerCategoryTrend();
-  // Future<String> getTotalPerBrand();
-  // Future<String> getTotalPerBrandTrend();
-  // Future<String> getNumberOfTransactions();
-  // Future<String> getNumberOfTransactionsPerCategory();
-  // Future<String> getNumberOfTransactionsPerBrand();
-  // Future<String> getHighestValueTransaction();
-  // Future<String> getLowestValueTransaction();
-  // Future<String> getAverageValueTransaction();
-  // Future<String> getTransactionsStandardDeviation();
-  // Future<String> getfinanceVisualizationCirclePackMetric();
+  Future<dynamic> getQuery(String token, range, id);
+}
+
+class FinanceVisualizationCirclePackMetricRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {financeVisualizationCirclePackMetric (range:\"${range}\")}"
+        },
+        options: options,
+      );
+      final jsonData =
+          response.data["data"]["financeVisualizationCirclePackMetric"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData)["children"];
+      Map<String, dynamic> jsonMap = {};
+      print("seprator");
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["children"]}");
+        jsonMap[element["label"]] = element["children"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class AverageValueTransactionRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {"query": "query {averageValueTransaction (range:\"${range}\")}"},
+        options: options,
+      );
+      final jsonData = response.data["data"]["averageValueTransaction"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class TransactionsStandardDeviationRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, category_id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {transactionsStandardDeviation (range:\"${range}\", id:${category_id})}"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["transactionsStandardDeviation"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<dynamic, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class LowestValueTransactionRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {"query": "query {lowestValueTransaction (range:\"${range}\")}"},
+        options: options,
+      );
+      final jsonData = response.data["data"]["lowestValueTransaction"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class HighestValueTransactionRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {"query": "query {highestValueTransaction (range:\"${range}\")}"},
+        options: options,
+      );
+      final jsonData = response.data["data"]["highestValueTransaction"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class NumberOfTransactionsPerBrandRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {numberOfTransactionsPerBrand (range:\"${range}\", id:${id})}"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["numberOfTransactionsPerBrand"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class NumberOfTransactionsPerCategoryRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {numberOfTransactionsPerCategory (range:\"${range}\")}"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["numberOfTransactionsPerCategory"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class TotalPerBrandTrendRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query": "query {totalPerBrandTrend (range:\"${range}\", id:${id})}"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["totalPerBrandTrend"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class NumberOfTransactionsRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {"query": "query {numberOfTransactions (range:\"${range}\")}"},
+        options: options,
+      );
+      final jsonData = response.data["data"]["numberOfTransactions"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class TotalPerBrandRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, category_id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {totalPerBrand (range:\"${range}\", category_id:${category_id})}"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["totalPerBrand"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
+}
+
+class TotalPerCategoryTrendRepo implements DashboardRepo {
+  Dio dio = Dio();
+  @override
+  Future<dynamic> getQuery(String token, range, id) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {totalPerCategoryTrend (range:\"${range}\", id:${id})}"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["totalPerCategoryTrend"];
+      print(jsonData);
+      // Parse the JSON string
+      List<dynamic> jsonArray = json.decode(jsonData);
+      Map<String, dynamic> jsonMap = {};
+      jsonArray.forEach((element) {
+        print("${element["label"]} ${element["value"]}");
+        jsonMap[element["label"]] = element["value"];
+      });
+
+      print(jsonMap);
+      return jsonMap;
+    } catch (e) {
+      print(e.toString());
+      return Map();
+    }
+  }
 }
 
 class IncomePerCategoryRepo implements DashboardRepo {
   Dio dio = Dio();
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -58,7 +399,7 @@ class IncomePerCategoryRepo implements DashboardRepo {
 class ExpensesPerCategoryRepo implements DashboardRepo {
   Dio dio = Dio();
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -88,7 +429,7 @@ class ExpensesPerCategoryRepo implements DashboardRepo {
 class TotalExpensesTrendRepo implements DashboardRepo {
   Dio dio = Dio();
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -118,7 +459,7 @@ class TotalExpensesTrendRepo implements DashboardRepo {
 class TotalIncomeTrendRepo implements DashboardRepo {
   Dio dio = Dio();
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -148,7 +489,7 @@ class TotalIncomeTrendRepo implements DashboardRepo {
 class TotalIncomeRepo implements DashboardRepo {
   Dio dio = Dio();
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -178,7 +519,7 @@ class TotalIncomeRepo implements DashboardRepo {
 class TotalExpensesRepo implements DashboardRepo {
   Dio dio = Dio();
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -209,7 +550,7 @@ class TotalInvestmentRepo implements DashboardRepo {
   Dio dio = Dio();
 
   @override
-  Future<double> getQuery(String token, range) async {
+  Future<double> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -239,7 +580,7 @@ class TotalCashRepo implements DashboardRepo {
   Dio dio = Dio();
 
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -269,7 +610,7 @@ class TotalSavingsRepo implements DashboardRepo {
   Dio dio = Dio();
 
   @override
-  Future<dynamic> getQuery(String token, range) async {
+  Future<dynamic> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -299,7 +640,7 @@ class NetWorthRepo implements DashboardRepo {
   Dio dio = Dio();
 
   @override
-  Future<double> getQuery(String token, range) async {
+  Future<double> getQuery(String token, range, id) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
