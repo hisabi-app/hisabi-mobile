@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 main() async {
-  final token = "25|wYANwyf6RsxUS3rvkwHS5BwPBieuzCBij3Ho1ZUI8e08e6a1";
+  final token = "";
   final repo = FinanceVisualizationCirclePackMetricRepo();
 
   final result = await repo.getQuery(token, "current-year", 0);
