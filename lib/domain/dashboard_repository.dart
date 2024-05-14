@@ -2,14 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-main() async {
-  final token = "";
-  final repo = FinanceVisualizationCirclePackMetricRepo();
-
-  final result = await repo.getQuery(token, "current-year", 0);
-  print(result);
-}
-
 abstract class DashboardRepo {
   Future<dynamic> getQuery(String token, range, id);
 }
