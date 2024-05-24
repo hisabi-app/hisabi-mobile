@@ -3,14 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 
-class TransactionsPage extends StatelessWidget {
+class TransactionsPage extends StatefulWidget {
+  @override
+  State<TransactionsPage> createState() => _TransactionsPageState();
+}
+
+class _TransactionsPageState extends State<TransactionsPage> {
   final route = MaterialPageRoute(builder: (context) => TransactionsPage());
-  final allTransactionsRepo = AllTransactionsRepo();
+
+  final filteredTransactionsRepo = FilteredTransactionsRepo();
+TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    _searchController.text = "";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
-    final transactions = allTransactionsRepo.getTransactions(token, "");
+    final transactions = filteredTransactionsRepo.getTransactions(token, _searchController.text);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -41,7 +54,7 @@ class TransactionsPage extends StatelessWidget {
                             SizedBox(
                               width: width * 0.1,
                             ),
-                            SearchBar(
+                            SearchBar(controller: ,
                               leading: const Icon(Icons.search),
                               constraints: BoxConstraints(
                                 maxWidth: width * 0.8,
