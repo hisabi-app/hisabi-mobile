@@ -12,6 +12,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
   final route = MaterialPageRoute(builder: (context) => TransactionsPage());
 
   final allTransactionsRepo = AllTransactionsRepo();
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void queryListener() {}
 
