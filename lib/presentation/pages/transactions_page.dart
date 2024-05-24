@@ -11,19 +11,14 @@ class TransactionsPage extends StatefulWidget {
 class _TransactionsPageState extends State<TransactionsPage> {
   final route = MaterialPageRoute(builder: (context) => TransactionsPage());
 
-  final filteredTransactionsRepo = FilteredTransactionsRepo();
-TextEditingController _searchController = TextEditingController();
+  final allTransactionsRepo = AllTransactionsRepo();
 
-  @override
-  void initState() {
-    _searchController.text = "";
-    super.initState();
-  }
+  void queryListener() {}
 
   @override
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
-    final transactions = filteredTransactionsRepo.getTransactions(token, _searchController.text);
+    final transactions = allTransactionsRepo.getTransactions(token, "");
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -54,7 +49,7 @@ TextEditingController _searchController = TextEditingController();
                             SizedBox(
                               width: width * 0.1,
                             ),
-                            SearchBar(controller: ,
+                            SearchBar(
                               leading: const Icon(Icons.search),
                               constraints: BoxConstraints(
                                 maxWidth: width * 0.8,

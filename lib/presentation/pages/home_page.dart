@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final route = MaterialPageRoute(builder: (context) => HomePage());
-  StatelessWidget? _currentPage;
+  Widget? _currentPage;
   int _currentPageIndex = 0;
 
   final pages = [
