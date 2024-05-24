@@ -8,7 +8,7 @@ void main() {
     test('getBrands all, with valid token', () async {
       // Arrange
       final repo = AllBrandsRepo();
-      final token = "30|Oid2XwMfiEiiXFukOnMybN7lb0P4UR5mTkpYdOyk42a8f959";
+      final token = "";
 
       // Act
       final brands = await repo.getBrands(token, "");
@@ -19,7 +19,7 @@ void main() {
     test('getBrands all, with valid token', () async {
       // Arrange
       final repo = AllBrandsRepo();
-      final token = "30|Oid2XwMfiEiiXFukOnMybN7lb0P4UR5mTkpYdOyk42a8f959";
+      final token = "";
 
       // Act
       final brands = await repo.getBrands(token, "");

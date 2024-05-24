@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         '/sms_parser': (context) => SMSParserPage(
               smsRepository: TelephonyRepository(),
             ),
+        
       },
     );
   }

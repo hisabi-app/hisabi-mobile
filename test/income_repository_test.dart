@@ -8,7 +8,7 @@ void main() {
     test('get totalIncome, for current-month', () async {
       // Arrange
       final repo = TotalIncomeRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "current-month";
 
       // Act
@@ -23,7 +23,7 @@ void main() {
     test('get totalIncome, for last-month', () async {
       // Arrange
       final repo = TotalIncomeRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "last-month";
 
       // Act
@@ -38,7 +38,7 @@ void main() {
     test('get totalIncome, for current-year', () async {
       // Arrange
       final repo = TotalIncomeRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "current-year";
 
       // Act
@@ -53,7 +53,7 @@ void main() {
     test('get totalIncome, for last-year', () async {
       // Arrange
       final repo = TotalIncomeRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "last-year";
 
       // Act
@@ -67,7 +67,7 @@ void main() {
     test('get totalIncome, for all-time', () async {
       // Arrange
       final repo = TotalIncomeRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "all-time";
 
       // Act
@@ -83,7 +83,7 @@ void main() {
     test('get totalIncomeTrend, for last-twelve-months', () async {
       // Arrange
       final repo = TotalIncomeTrendRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "last-twelve-months";
 
       // Act
@@ -97,7 +97,7 @@ void main() {
     test('get totalIncomeTrend, for current-year', () async {
       // Arrange
       final repo = TotalIncomeTrendRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "current-year";
 
       // Act
@@ -111,7 +111,7 @@ void main() {
     test('get totalIncomeTrend, for last-year', () async {
       // Arrange
       final repo = TotalIncomeTrendRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "last-year";
 
       // Act
@@ -124,7 +124,7 @@ void main() {
     test('get totalIncomeTrend, for all-time', () async {
       // Arrange
       final repo = TotalIncomeTrendRepo();
-      final token = "19|e7TfZjtIndTRj1kOydTd4w6jvJAYi3zM6RpxDqqy56ca0d06";
+      final token = "";
       final range = "all-time";
 
       // Act

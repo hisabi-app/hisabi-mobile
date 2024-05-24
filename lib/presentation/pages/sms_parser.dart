@@ -1,6 +1,7 @@
 import 'package:hisabi_mobile_flutter/domain/sms_repository.dart';
 import 'package:hisabi_mobile_flutter/data/models/sms_model.dart';
 import 'package:flutter/material.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/update_bank_list.dart';
 import 'package:telephony/telephony.dart';
 
 class SMSParserPage extends StatelessWidget {
@@ -40,11 +41,49 @@ class SMSParserPage extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return Text("Error: ${snapshot.error}"); // Show error message
                 } else {
+                  final senders = snapshot.data!
+                      .map(
+                        (e) {
+                          return e.address;
+                        },
+                      )
+                      .toSet()
+                      .toList();
+                  final sendersDropDownItems = senders.map(
+                    (e) {
+                      return DropdownMenuItem(
+                        child: Text(e),
+                        value: e,
+                      );
+                    },
+                  ).toList();
+
                   return SingleChildScrollView(
                     child: Column(
-                      children: snapshot.data!.map((element) {
-                        return Text(element.text);
-                      }).toList(),
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => UpdateBankList(
+                                  sendersDropDownItems: sendersDropDownItems),
+                            ));
+                          },
+                          child: Text("Update List Of Banks"),
+                        ),
+                        Column(
+                          children: snapshot.data!.map((element) {
+                            return Row(
+                              children: [
+                                Text(element.id),
+                                SizedBox(
+                                  width: width * 0.2,
+                                ),
+                                Text(element.address),
+                              ],
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
                   );
                 }

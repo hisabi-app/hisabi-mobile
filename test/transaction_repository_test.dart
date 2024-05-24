@@ -7,7 +7,7 @@ void main() {
     test('getTransactions all, with valid token', () async {
       // Arrange
       final repo = AllTransactionsRepo();
-      final token = "31|WbANRrZT1KOhO2qBZzx7XAeXeQIRVGxE6z45FGj914274f1c";
+      final token = "";
 
       // Act
       final transactions = await repo.getTransactions(token, "");
@@ -28,6 +28,33 @@ void main() {
       // Assert
       expect(transactions, isEmpty);
     });
+  });
+  group('FilteredTransactionsRepo', () {
+    test('search, with valid token', () async {
+      // Arrange
+      final repo = FilteredTransactionsRepo();
+      final token = "";
+      final query = "salary";
+
+      // Act
+      final transactions = await repo.getTransactions(token, query);
+      final bufferList = List.from(transactions.map((x) => x));
+      print(bufferList.length);
+      // Assert
+      expect(transactions, isNotEmpty);
+    });
+
+    // test('getTransactions all, with invalid token', () async {
+    //   // Arrange
+    //   final repo = AllTransactionsRepo();
+    //   final token = "";
+
+    //   // Act
+    //   final transactions = await repo.getTransactions(token, "");
+
+    //   // Assert
+    //   expect(transactions, isEmpty);
+    // });
   });
   // // group('FilteredTransactionsRepo', () {
   // //   test(

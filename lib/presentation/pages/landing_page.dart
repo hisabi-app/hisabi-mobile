@@ -14,6 +14,7 @@ class LandingPage extends StatelessWidget {
     String? email = prefs.getString('email');
     String? password = prefs.getString('password');
     String? token = prefs.getString('token');
+    List<String>? listOfBanks = prefs.getStringList('listOfBanks');
     if (email != null && password != null) {
       return token;
     }
@@ -28,6 +29,7 @@ class LandingPage extends StatelessWidget {
             final oldState = context.read<AppCubit>().state;
             context.read<AppCubit>().updateState(
                 oldState.copyWith(token: snapshot.data.toString()));
+
             return HomePage();
           } else {
             return Scaffold(

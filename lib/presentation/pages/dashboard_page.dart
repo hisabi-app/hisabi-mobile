@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hisabi_mobile_flutter/domain/dashboard_repository%20copy.dart';
+import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -6,6 +9,8 @@ class DashboardPage extends StatelessWidget {
     final route = MaterialPageRoute(builder: (context) => DashboardPage());
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final netWorth = NetWorthRepo();
+    final token = context.read<AppCubit>().state.token;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -24,55 +29,77 @@ class DashboardPage extends StatelessWidget {
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: width * 0.02, top: height * 0.01),
-                    height: height * 0.2,
-                    width: width * 0.8,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[100],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Net Worth",
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                        Text(
-                          "AED 37.119k",
-                          style: TextStyle(fontSize: 50),
-                        )
-                      ],
-                    ),
-                  ),
+                  FutureBuilder(
+                      future: netWorth.getQuery(token, "", ""),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text(snapshot.error.toString());
+                        } else {
+                          return Container(
+                            padding: EdgeInsets.only(
+                                left: width * 0.02, top: height * 0.01),
+                            height: height * 0.2,
+                            width: width * 0.8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[100],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Net Worth",
+                                  style: TextStyle(color: Colors.grey[700]),
+                                ),
+                                Text(
+                                  "AED ${snapshot.data!.round() / 1000}k",
+                                  style: TextStyle(fontSize: 50),
+                                )
+                              ],
+                            ),
+                          );
+                        }
+                      }),
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: width * 0.02, top: height * 0.01),
-                    height: height * 0.2,
-                    width: width * 0.8,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[100],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Total Cash",
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                        Text(
-                          "AED 37.119k",
-                          style: TextStyle(fontSize: 50),
-                        )
-                      ],
-                    ),
-                  ),
+                  FutureBuilder(
+                      future: TotalCashRepo().getQuery(token, "", ""),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text(snapshot.error.toString());
+                        } else {
+                          return Container(
+                            padding: EdgeInsets.only(
+                                left: width * 0.02, top: height * 0.01),
+                            height: height * 0.2,
+                            width: width * 0.8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[100],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Total Cash",
+                                  style: TextStyle(color: Colors.grey[700]),
+                                ),
+                                Text(
+                                  "AED ${snapshot.data.round() / 1000}k",
+                                  style: TextStyle(fontSize: 50),
+                                )
+                              ],
+                            ),
+                          );
+                        }
+                      }),
                   Text("Total Investment"),
                   Text("Total Income"),
                   Text("Total Expenses"),

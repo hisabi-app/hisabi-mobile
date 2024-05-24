@@ -13,9 +13,17 @@ class TelephonyRepository extends SmsRepository {
   Future<List<SmsModel>> fetchFromInbox() async {
     bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
     List<SmsMessage> messages = await telephony.getInboxSms();
-
+    messages.forEach((element) {
+      print(
+          "id ${element.id} address ${element.address} body ${element.body} date ${element.date}");
+    });
     List<SmsModel> smsModels = messages
-        .map((message) => SmsModel(text: message.body.toString()))
+        .map((message) => SmsModel(
+              id: message.id.toString(),
+              address: message.address.toString(),
+              body: message.body.toString(),
+              date: message.date.toString(),
+            ))
         .toList();
     return smsModels;
   }
