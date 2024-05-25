@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
+import 'package:hisabi_mobile_flutter/presentation/helper_widgets/create_transaction_popup.dart';
 
 class TransactionsPage extends StatefulWidget {
   @override
@@ -198,7 +199,14 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 ),
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return CreateTransactionPopup();
+                                      },
+                                    );
+                                  },
                                   child: const Text("CREATE TRANSACTION")),
                             ],
                           ),
