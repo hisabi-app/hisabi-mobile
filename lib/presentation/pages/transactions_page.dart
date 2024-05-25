@@ -21,6 +21,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
     super.initState();
     _token = "";
     _searchController.addListener(queryListener);
+    _transactions = filteredTransactionsRepo.getTransactions(
+        _token!, _searchController.text);
   }
 
   @override
@@ -43,6 +45,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
     final token = context.read<AppCubit>().state.token;
     setState(() {
       _token = token;
+      _transactions = filteredTransactionsRepo.getTransactions(
+          _token!, _searchController.text);
     });
 
     final height = MediaQuery.of(context).size.height;
