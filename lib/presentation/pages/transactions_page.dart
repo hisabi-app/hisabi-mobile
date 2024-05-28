@@ -80,45 +80,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 SizedBox(
                   height: height * 0.1,
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: width * 0.05,
-                    ),
-                    Container(width: width * 0.05, child: Text("ID")),
-                    SizedBox(
-                      width: width * 0.02,
-                    ),
-                    Container(
-                      width: width * 0.2,
-                      child: Text("AMOUNT"),
-                    ),
-                    SizedBox(
-                      width: width * 0.02,
-                    ),
-                    Container(
-                      width: width * 0.15,
-                      child: Text("BRAND"),
-                    ),
-                    SizedBox(
-                      width: width * 0.05,
-                    ),
-                    Container(
-                      width: width * 0.2,
-                      child: Text("CATEGORY"),
-                    ),
-                    SizedBox(
-                      width: width * 0.02,
-                    ),
-                    Container(
-                      width: width * 0.2,
-                      child: Text("DATE"),
-                    ),
-                    // SizedBox(
-                    //   width: width * 0.05,
-                    // ),
-                  ],
-                ),
                 FutureBuilder(
                     future: _transactions,
                     builder: (context, snapshot) {
@@ -149,47 +110,79 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                           final data = snapshot.data;
                                           final transaction = data![index];
                                           return Center(
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: width * 0.05,
-                                                ),
-                                                Container(
-                                                    width: width * 0.07,
-                                                    child:
-                                                        Text(transaction.id)),
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(left: 0),
-                                                  width: width * 0.15,
-                                                  child: Text(transaction.amount
-                                                      .toString()),
-                                                ),
-                                                Container(
-                                                  width: width * 0.25,
-                                                  child: Text(transaction
-                                                      .brand.brandName),
-                                                ),
-                                                SizedBox(
-                                                  width: width * 0.02,
-                                                ),
-                                                Container(
-                                                  width: width * 0.17,
-                                                  child: Text(transaction
-                                                      .brand.category.name),
-                                                ),
-                                                SizedBox(
-                                                  width: width * 0.05,
-                                                ),
-                                                Container(
-                                                  width: width * 0.19,
-                                                  child: Text(
-                                                    transaction.date
-                                                        .toString()
-                                                        .substring(0, 10),
+                                            child: Container(
+                                              width: width * 0.7,
+                                              padding: EdgeInsetsDirectional
+                                                  .symmetric(
+                                                      vertical: height * 0.03),
+                                              margin: EdgeInsetsDirectional
+                                                  .symmetric(
+                                                      vertical: height * 0.03),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.grey),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: width * 0.03,
                                                   ),
-                                                ),
-                                              ],
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        "${transaction.brand.brandName}",
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
+                                                      Text(
+                                                        transaction.brand
+                                                            .category.name,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    22,
+                                                                    53,
+                                                                    207)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    width: width * 0.2,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 0),
+                                                        width: width * 0.20,
+                                                        child: Text(
+                                                          "AED ${transaction.amount.toString()}",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: width * 0.19,
+                                                        child: Text(
+                                                          transaction.date
+                                                              .toString()
+                                                              .substring(0, 10),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           );
                                         },
