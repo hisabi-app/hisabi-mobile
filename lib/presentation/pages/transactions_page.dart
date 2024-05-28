@@ -114,10 +114,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                               width: width * 0.7,
                                               padding: EdgeInsetsDirectional
                                                   .symmetric(
-                                                      vertical: height * 0.03),
+                                                      vertical: height * 0.015),
                                               margin: EdgeInsetsDirectional
                                                   .symmetric(
-                                                      vertical: height * 0.03),
+                                                      vertical: height * 0.010),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
