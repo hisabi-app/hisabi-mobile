@@ -101,7 +101,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 height: height * 0.45,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Expanded(
                                       child: ListView.builder(
@@ -121,34 +120,37 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  color: Colors.grey),
+                                                  color: Colors.grey[100]),
                                               child: Row(
                                                 children: [
                                                   SizedBox(
                                                     width: width * 0.03,
                                                   ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "${transaction.brand.brandName}",
-                                                        style: TextStyle(
-                                                            fontSize: 15),
-                                                      ),
-                                                      Text(
-                                                        transaction.brand
-                                                            .category.name,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    22,
-                                                                    53,
-                                                                    207)),
-                                                      ),
-                                                    ],
+                                                  Container(
+                                                    width: width * 0.2,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "${transaction.brand.brandName}",
+                                                          style: TextStyle(
+                                                              fontSize: 15),
+                                                        ),
+                                                        Text(
+                                                          transaction.brand
+                                                              .category.name,
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      22,
+                                                                      53,
+                                                                      207)),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                   SizedBox(
                                                     width: width * 0.2,
