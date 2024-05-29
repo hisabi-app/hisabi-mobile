@@ -7,6 +7,8 @@ import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 class BrandsPage extends StatelessWidget {
   final route = MaterialPageRoute(builder: (context) => BrandsPage());
   final allBrandsRepo = AllBrandsRepo();
+  SearchController _searchController = SearchController();
+
   // final filteredBrandsRepo = FilteredBrandsRepo();
   @override
   Widget build(BuildContext context) {
@@ -19,136 +21,154 @@ class BrandsPage extends StatelessWidget {
       body: Container(
         child: SingleChildScrollView(
           child: Center(
-            child: FutureBuilder(
-                future: brands,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: height * 0.3),
-                        const Center(child: CircularProgressIndicator()),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text(snapshot.error.toString());
-                  } else {
-                    return Center(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: height * 0.1,
-                          ),
-                          Row(children: [
-                            SizedBox(
-                              width: width * 0.1,
-                            ),
-                            SearchBar(
-                              leading: const Icon(Icons.search),
-                              constraints: BoxConstraints(
-                                maxWidth: width * 0.8,
-                                minHeight: height * 0.05,
-                              ),
-                            ),
-                          ]),
-                          SizedBox(
-                            width: width * 0.1,
-                          ),
-                          SizedBox(
-                            height: height * 0.1,
-                          ),
-                          Row(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: height * 0.1,
+                ),
+                Row(children: [
+                  SizedBox(
+                    width: width * 0.1,
+                  ),
+                  SearchBar(
+                    controller: _searchController,
+                    leading: const Icon(Icons.search),
+                    constraints: BoxConstraints(
+                      maxWidth: width * 0.8,
+                      minHeight: height * 0.05,
+                    ),
+                  ),
+                ]),
+                SizedBox(
+                  width: width * 0.1,
+                ),
+                SizedBox(
+                  height: height * 0.1,
+                ),
+                FutureBuilder(
+                    future: brands,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: height * 0.3),
+                            const Center(child: CircularProgressIndicator()),
+                          ],
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text(snapshot.error.toString());
+                      } else {
+                        return Center(
+                          child: Column(
                             children: [
-                              SizedBox(
-                                width: width * 0.05,
-                              ),
-                              Container(width: width * 0.1, child: Text("ID")),
-                              SizedBox(
-                                width: width * 0.05,
-                              ),
                               Container(
-                                width: width * 0.3,
-                                child: Text("NAME"),
-                              ),
-                              SizedBox(
-                                width: width * 0.05,
-                              ),
-                              Container(
-                                width: width * 0.2,
-                                child: Text("CATEGORY"),
-                              ),
-                              SizedBox(
-                                width: width * 0.05,
-                              ),
-                              Container(
-                                width: width * 0.2,
-                                child: Text("Tr. Count"),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: height * 0.45,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: ListView.builder(
-                                    itemCount: snapshot.data?.length,
-                                    itemBuilder: (context, index) {
-                                      final data = snapshot.data;
-                                      final brand = data![index];
-                                      return Center(
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              width: width * 0.05,
-                                            ),
-                                            Container(
-                                                width: width * 0.1,
-                                                child: Text(
-                                                    brand.brandId.toString())),
-                                            SizedBox(
-                                              width: width * 0.05,
-                                            ),
-                                            Container(
-                                              width: width * 0.3,
-                                              child: Text(
-                                                brand.brandName,
+                                height: height * 0.45,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemCount: snapshot.data?.length,
+                                        itemBuilder: (context, index) {
+                                          final data = snapshot.data;
+                                          final brand = data![index];
+                                          return Center(
+                                            child: Container(
+                                              width: width * 0.7,
+                                              padding: EdgeInsetsDirectional
+                                                  .symmetric(
+                                                      vertical: height * 0.015),
+                                              margin: EdgeInsetsDirectional
+                                                  .symmetric(
+                                                      vertical: height * 0.010),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.grey[100]),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: width * 0.03,
+                                                  ),
+                                                  Container(
+                                                    width: width * 0.2,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "${brand.brandName}",
+                                                          style: TextStyle(
+                                                              fontSize: 15),
+                                                        ),
+                                                        Text(
+                                                          brand.category.name,
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      22,
+                                                                      53,
+                                                                      207)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: width * 0.2,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        child: Text(
+                                                          "Transcations Count",
+                                                          style: TextStyle(
+                                                            fontSize: 9,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 0),
+                                                        width: width * 0.20,
+                                                        child: Text(
+                                                          "${brand.transactionsCount}",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: width * 0.05,
-                                            ),
-                                            Container(
-                                              width: width * 0.2,
-                                              child: Text(brand.category.name),
-                                            ),
-                                            SizedBox(
-                                              width: width * 0.05,
-                                            ),
-                                            Container(
-                                              width: width * 0.2,
-                                              child: Text(brand
-                                                  .transactionsCount
-                                                  .toString()),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  child: const Text("CREATE BRAND")),
+                            ],
                           ),
-                          TextButton(
-                              onPressed: () {}, child: Text("CREATE BRAND")),
-                        ],
-                      ),
-                    );
-                  }
-                }),
+                        );
+                      }
+                    }),
+              ],
+            ),
           ),
         ),
       ),
