@@ -33,24 +33,25 @@ class FilteredCategoriesRepo implements CategoriesRepo {
   Dio dio = Dio();
 
   @override
-  Future<String> getCategories(String token, String query) async {
-    String categories = "";
+  Future<List<CategoryModel>> getCategories(String token, String query) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
-      await dio
-          .post(
-            "https://finance-demo.saleem.dev/graphql",
-            data: {
-              "query":
-                  "query { categories(search: \"${query}\", first: 50, page: 1) { paginatorInfo { count currentPage firstItem hasMorePages lastItem lastPage perPage total } data { id name type color } } }"
-            },
-            options: options,
-          )
-          .then((value) => categories = value.toString());
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "query {  brands (search:\"${query}\", first: 10000, page: 1){    data {      id,      name,      category {        name,        id,     }      transactionsCount    }    paginatorInfo {      count,      total,          }  } }"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["categories"]["data"];
+      print(jsonData);
+      List<CategoryModel> categories = List<CategoryModel>.from(
+          jsonData.map((x) => CategoryModel.fromJson(x)));
+      return categories;
     } catch (e) {
       print(e.toString());
+      return [];
     }
-    print(categories);
-    return categories;
   }
 }

@@ -5,13 +5,13 @@ import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 
 class CategoriesPage extends StatelessWidget {
   final route = MaterialPageRoute(builder: (context) => CategoriesPage());
-  final allCategoriesRepo = AllCategoriesRepo();
+  final filteredCategoriesRepo = FilteredCategoriesRepo();
   SearchController _searchController = SearchController();
 
   @override
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
-    final categories = allCategoriesRepo.getCategories(token, "");
+    final categories = filteredCategoriesRepo.getCategories(token, "");
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
