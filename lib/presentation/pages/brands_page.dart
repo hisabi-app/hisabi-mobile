@@ -12,7 +12,7 @@ class BrandsPage extends StatefulWidget {
 class _BrandsPageState extends State<BrandsPage> {
   final route = MaterialPageRoute(builder: (context) => BrandsPage());
 
-  final allBrandsRepo = AllBrandsRepo();
+  final filteredBrandsRepo = FilteredBrandsRepo();
 
   SearchController _searchController = SearchController();
   String? _token;
@@ -23,7 +23,7 @@ class _BrandsPageState extends State<BrandsPage> {
     super.initState();
     _token = "";
     _searchController.addListener(queryListener);
-    _brands = allBrandsRepo.getBrands(_token!, _searchController.text);
+    _brands = filteredBrandsRepo.getBrands(_token!, _searchController.text);
   }
 
   @override
@@ -36,7 +36,7 @@ class _BrandsPageState extends State<BrandsPage> {
 
   void queryListener() {
     setState(() {
-      _brands = allBrandsRepo.getBrands(_token!, _searchController.text);
+      _brands = filteredBrandsRepo.getBrands(_token!, _searchController.text);
     });
   }
 
@@ -44,7 +44,7 @@ class _BrandsPageState extends State<BrandsPage> {
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
     print(token);
-    final brands = allBrandsRepo.getBrands(token, "");
+    final brands = filteredBrandsRepo.getBrands(token, "");
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
