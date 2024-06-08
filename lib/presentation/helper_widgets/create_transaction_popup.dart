@@ -27,7 +27,10 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
             SizedBox(
               height: height * 0.02,
             ),
-            Text("Create Transaction"),
+            Text(
+              "Create Transaction",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
             SizedBox(
               height: height * 0.025,
             ),
@@ -37,7 +40,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                 Container(
                     padding: EdgeInsets.only(top: 0, bottom: 0),
                     margin: EdgeInsets.only(top: 0, bottom: 0),
-                    width: width * 0.2,
+                    width: width * 0.5,
                     child: TextFormField(
                       onChanged: (value) {
                         amountController.text = value;
@@ -56,7 +59,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                 Container(
                     padding: EdgeInsets.only(top: 0, bottom: 0),
                     margin: EdgeInsets.only(top: 0, bottom: 0),
-                    width: width * 0.2,
+                    width: width * 0.5,
                     child: TextFormField(
                       onChanged: (value) {
                         dateController.text = value;
@@ -75,7 +78,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                 Container(
                     padding: EdgeInsets.only(top: 0, bottom: 0),
                     margin: EdgeInsets.only(top: 0, bottom: 0),
-                    width: width * 0.2,
+                    width: width * 0.5,
                     child: TextFormField(
                       onChanged: (value) {
                         brandController.text = value;
@@ -94,7 +97,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                 Container(
                     padding: EdgeInsets.only(top: 0, bottom: 0),
                     margin: EdgeInsets.only(top: 0, bottom: 0),
-                    width: width * 0.2,
+                    width: width * 0.5,
                     child: TextFormField(
                       onChanged: (value) {
                         noteController.text = value;
