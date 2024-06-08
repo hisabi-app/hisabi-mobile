@@ -47,6 +47,10 @@ class _BrandsPageState extends State<BrandsPage> {
     final brands = filteredBrandsRepo.getBrands(token, "");
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    setState(() {
+      _token = token;
+      _brands = filteredBrandsRepo.getBrands(_token!, _searchController.text);
+    });
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
@@ -76,7 +80,7 @@ class _BrandsPageState extends State<BrandsPage> {
                   height: height * 0.1,
                 ),
                 FutureBuilder(
-                    future: brands,
+                    future: _brands,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Column(
