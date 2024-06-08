@@ -4,12 +4,42 @@ import 'package:hisabi_mobile_flutter/data/models/brand_model.dart';
 import 'package:hisabi_mobile_flutter/domain/brands_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 
-class BrandsPage extends StatelessWidget {
-  final route = MaterialPageRoute(builder: (context) => BrandsPage());
-  final allBrandsRepo = AllBrandsRepo();
-  SearchController _searchController = SearchController();
+class BrandsPage extends StatefulWidget {
+  @override
+  State<BrandsPage> createState() => _BrandsPageState();
+}
 
-  // final filteredBrandsRepo = FilteredBrandsRepo();
+class _BrandsPageState extends State<BrandsPage> {
+  final route = MaterialPageRoute(builder: (context) => BrandsPage());
+
+  final allBrandsRepo = AllBrandsRepo();
+
+  SearchController _searchController = SearchController();
+  String? _token;
+  Future<dynamic>? _brands;
+
+  @override
+  void initState() {
+    super.initState();
+    _token = "";
+    _searchController.addListener(queryListener);
+    _brands = allBrandsRepo.getBrands(_token!, _searchController.text);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchController.removeListener(queryListener);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void queryListener() {
+    setState(() {
+      _brands = allBrandsRepo.getBrands(_token!, _searchController.text);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
