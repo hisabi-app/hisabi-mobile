@@ -40,7 +40,7 @@ class FilteredCategoriesRepo implements CategoriesRepo {
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {  brands (search:\"${query}\", first: 10000, page: 1){    data {      id,      name,      category {        name,        id,     }      transactionsCount    }    paginatorInfo {      count,      total,          }  } }"
+              "query { categories (search: \"${query}\") {    data {      id      name      type color    }    paginatorInfo {      count      total    }  } }"
         },
         options: options,
       );

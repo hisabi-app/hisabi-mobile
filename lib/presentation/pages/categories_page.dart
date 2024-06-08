@@ -3,17 +3,54 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/categories_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 
-class CategoriesPage extends StatelessWidget {
+class CategoriesPage extends StatefulWidget {
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
   final route = MaterialPageRoute(builder: (context) => CategoriesPage());
+
   final filteredCategoriesRepo = FilteredCategoriesRepo();
+
   SearchController _searchController = SearchController();
+  String? _token;
+  Future<dynamic>? _categories;
+
+  @override
+  void initState() {
+    super.initState();
+    _token = "";
+    _searchController.addListener(queryListener);
+    _categories =
+        filteredCategoriesRepo.getCategories(_token!, _searchController.text);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchController.removeListener(queryListener);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void queryListener() {
+    setState(() {
+      _categories =
+          filteredCategoriesRepo.getCategories(_token!, _searchController.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final token = context.read<AppCubit>().state.token;
-    final categories = filteredCategoriesRepo.getCategories(token, "");
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    setState(() {
+      _token = token;
+      _categories =
+          filteredCategoriesRepo.getCategories(_token!, _searchController.text);
+    });
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
@@ -43,7 +80,7 @@ class CategoriesPage extends StatelessWidget {
                   height: height * 0.1,
                 ),
                 FutureBuilder(
-                    future: categories,
+                    future: _categories,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Column(
