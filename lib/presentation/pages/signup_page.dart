@@ -1,6 +1,5 @@
 import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:email_validator/email_validator.dart' as EmailValidator2;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -52,27 +51,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () async {
-                  try {
-                    final credential = await FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    );
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return HomePage();
-                    }));
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'weak-password') {
-                      print('The password provided is too weak.');
-                    } else if (e.code == 'email-already-in-use') {
-                      print('The account already exists for that email.');
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
+                onPressed: () async {},
                 child: Text('Sign Up'),
               ),
             ],

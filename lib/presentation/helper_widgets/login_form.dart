@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/login_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:email_validator/email_validator.dart' as EmailValidator2;
