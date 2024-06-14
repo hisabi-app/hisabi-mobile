@@ -1,11 +1,44 @@
 import 'package:dio/dio.dart';
 import 'package:hisabi_mobile_flutter/data/models/brand_model.dart';
+import 'package:hisabi_mobile_flutter/data/models/category_model.dart';
 
-abstract class BrandsRepo {
+abstract class BrandsQueryRepo {
   Future<dynamic> getBrands(String token, String query);
 }
 
-class AllBrandsRepo implements BrandsRepo {
+abstract class BrandsMutationRepo {
+  Future<dynamic> createOrUpdateBrand(
+      String token, String brandName, int categoryId);
+}
+
+class CreateBrandRepo implements BrandsMutationRepo {
+  Dio dio = Dio();
+
+  Future<dynamic> createOrUpdateBrand(
+      String token, String brandName, int categoryId) async {
+    try {
+      Options options = Options(headers: {"Authorization": "Bearer $token"});
+      final response = await dio.post(
+        "https://finance-demo.saleem.dev/graphql",
+        data: {
+          "query":
+              "mutation {  createBrand(name:\"$brandName\", category_id: $categoryId) {    id    name    category {      id      name    }    transactionsCount  }  }"
+        },
+        options: options,
+      );
+      final jsonData = response.data["data"]["allBrands"];
+      print(jsonData);
+      List<BrandModel> brands =
+          List<BrandModel>.from(jsonData.map((x) => BrandModel.fromJson(x)));
+      return brands;
+    } catch (e) {
+      print(e.toString());
+      return []; // Return an empty list in case of failure
+    }
+  }
+}
+
+class AllBrandsRepo implements BrandsQueryRepo {
   Dio dio = Dio();
 
   @override
@@ -32,7 +65,7 @@ class AllBrandsRepo implements BrandsRepo {
   }
 }
 
-class FilteredBrandsRepo implements BrandsRepo {
+class FilteredBrandsRepo implements BrandsQueryRepo {
   Dio dio = Dio();
 
   @override
