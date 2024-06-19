@@ -75,4 +75,48 @@ void main() {
           '{"data":{"brands":{"paginatorInfo":{"count":0,"currentPage":1,"firstItem":null,"hasMorePages":false,"lastItem":null,"lastPage":1,"perPage":50,"total":0},"data":[]}}}');
     });
   });
+  group('BrandsMutationRepo', () {
+    test(
+        'test createBrand Repo,'
+        'create a new brand with valid token and existing category id',
+        () async {
+      // Arrange
+      final repo = CreateBrandRepo();
+      final token = "";
+      final brandName = "SHEIN";
+      final categoryId = 5;
+
+      // Act
+      final brands =
+          await repo.createOrUpdateBrand(token, brandName, categoryId);
+
+      // Assert
+      expect(
+          brands,
+          equals({
+            "createBrand": {
+              "id": "10",
+              "name": "${brandName}",
+              "category": {"id": "${categoryId}", "name": "Shopping"},
+              "transactionsCount": 0
+            }
+          }));
+    });
+
+    test(
+        'getBrands all, with an incorrect query for a non existing transaction,'
+        ' by brand name for instance', () async {
+      // Arrange
+      final repo = FilteredBrandsRepo();
+      final token = "";
+      final query = "nike";
+
+      // Act
+      final brands = await repo.getBrands(token, query);
+
+      // Assert
+      expect(brands,
+          '{"data":{"brands":{"paginatorInfo":{"count":0,"currentPage":1,"firstItem":null,"hasMorePages":false,"lastItem":null,"lastPage":1,"perPage":50,"total":0},"data":[]}}}');
+    });
+  });
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hisabi_mobile_flutter/data/models/transaction_model.dart';
 import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
@@ -43,49 +45,38 @@ void main() {
       // Assert
       expect(transactions, isNotEmpty);
     });
-
-    // test('getTransactions all, with invalid token', () async {
-    //   // Arrange
-    //   final repo = AllTransactionsRepo();
-    //   final token = "";
-
-    //   // Act
-    //   final transactions = await repo.getTransactions(token, "");
-
-    //   // Assert
-    //   expect(transactions, isEmpty);
-    // });
   });
-  // // group('FilteredTransactionsRepo', () {
-  // //   test(
-  // //       'getTransactions all, with a correct query for an existing transaction,'
-  // //       'by brand name for instance', () async {
-  // //     // Arrange
-  // //     final repo = FilteredTransactionsRepo();
-  // //     final token = "";
-  // //     final query = "IKEA";
 
-  // //     // Act
-  // //     final transactions = await repo.getTransactions(token, query);
+  group("Transaction Mutation Repo", () {
+    test(
+        "CreateTransaction Repo, Create Transaction with valid params and token",
+        () async {
+      // Arrange
+      final repo = CreateTransactionRepo();
+      final token = "";
+      final double amount = 100;
+      final brand_id = 3;
+      final created_at = "6/19/2024";
+      final note = "Enjoy";
 
-  // //     // Assert
-  // //     expect(transactions, isNotEmpty);
-  // //   });
+      // Act
+      final response = await repo.createOrUpdateTransaction(
+          token, amount, brand_id, created_at, note);
+      var expectedResponse = Map<String, dynamic>();
+      expectedResponse = {
+        "id": "34",
+        "brand": {
+          "name": "TODO",
+          "id": "3",
+          "transactionsCount": 14,
+          "category": {"name": "Groceries", "id": "3"}
+        },
+        "note": "Enjoy",
+        "amount": 100
+      };
 
-  // //   test(
-  // //       'getTransactions all, with an incorrect query for a non existing transaction,'
-  // //       ' by brand name for instance', () async {
-  // //     // Arrange
-  // //     final repo = FilteredTransactionsRepo();
-  // //     final token = "";
-  // //     final query = "nike";
-
-  // //     // Act
-  // //     final transactions = await repo.getTransactions(token, query);
-
-  // //     // Assert
-  // //     expect(transactions,
-  // //         '{"data":{"transactions":{"data":[],"paginatorInfo":{"hasMorePages":false}}}}');
-  // //   });
-  // });
+      // Assert
+      expect(response, equals(expectedResponse));
+    });
+  });
 }

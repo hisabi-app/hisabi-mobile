@@ -26,11 +26,10 @@ class CreateBrandRepo implements BrandsMutationRepo {
         },
         options: options,
       );
-      final jsonData = response.data["data"]["allBrands"];
+      final jsonData = response.data["data"]["createBrand"];
       print(jsonData);
-      List<BrandModel> brands =
-          List<BrandModel>.from(jsonData.map((x) => BrandModel.fromJson(x)));
-      return brands;
+      BrandModel brand = jsonData.map((x) => BrandModel.fromJson(x));
+      return brand;
     } catch (e) {
       print(e.toString());
       return []; // Return an empty list in case of failure
