@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
+import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
 
 class CreateTransactionPopup extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
     final brandController = TextEditingController();
     final noteController = TextEditingController();
     final token = context.read<AppCubit>().state.token;
+    final createTransactionRepo = CreateTransactionRepo();
 
     return Dialog(
       child: Container(
@@ -110,7 +113,21 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
             SizedBox(
               height: height * 0.02,
             ),
-            TextButton(onPressed: () {}, child: Text("Create"))
+            TextButton(
+                onPressed: () {
+                  createTransactionRepo.createOrUpdateTransaction(
+                    token,
+                    double.parse(amountController.text),
+                    int.parse(brandController.text),
+                    dateController.text,
+                    noteController.text,
+                  );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => TransactionsPage()),
+                  );
+                },
+                child: Text("Create"))
           ],
         ),
       ),
