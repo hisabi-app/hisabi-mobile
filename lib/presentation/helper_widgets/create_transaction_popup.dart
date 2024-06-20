@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/brands_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 import 'package:hisabi_mobile_flutter/domain/transactions_repository.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
 
 class CreateTransactionPopup extends StatefulWidget {
@@ -167,7 +168,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                   noteController.text,
                 );
 
-                Navigator.pop(context, true);
+                Navigator.pop(context);
               },
               child: Text("Create"),
             ),
