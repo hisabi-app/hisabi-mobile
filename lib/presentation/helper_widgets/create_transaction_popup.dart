@@ -59,12 +59,30 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                   padding: EdgeInsets.only(top: 0, bottom: 0),
                   margin: EdgeInsets.only(top: 0, bottom: 0),
                   width: width * 0.5,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      dateController.text = value;
+                  child: GestureDetector(
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101),
+                      );
+
+                      if (pickedDate != null) {
+                        setState(() {
+                          dateController.text =
+                              pickedDate.toIso8601String().split('T').first;
+                        });
+                      }
                     },
-                    controller: dateController,
-                    cursorHeight: height * 0.025,
+                    child: AbsorbPointer(
+                      child: TextFormField(
+                        controller: dateController,
+                        decoration: InputDecoration(
+                          hintText: 'Select Date',
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -148,10 +166,8 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                   dateController.text,
                   noteController.text,
                 );
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => TransactionsPage()),
-                );
+
+                Navigator.pop(context, true);
               },
               child: Text("Create"),
             ),
