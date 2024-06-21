@@ -29,12 +29,20 @@ class _TransactionsPageState extends State<TransactionsPage> {
   @override
   void dispose() {
     super.dispose();
+
     _searchController.removeListener(queryListener);
     _searchController.dispose();
     super.dispose();
   }
 
   void queryListener() {
+    setState(() {
+      _transactions = filteredTransactionsRepo.getTransactions(
+          _token!, _searchController.text);
+    });
+  }
+
+  _refreshTransactions() {
     setState(() {
       _transactions = filteredTransactionsRepo.getTransactions(
           _token!, _searchController.text);
@@ -198,7 +206,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
-                                        return CreateTransactionPopup();
+                                        return CreateTransactionPopup(
+                                          onTransactionCreated:
+                                              _refreshTransactions,
+                                        );
                                       },
                                     );
                                   },

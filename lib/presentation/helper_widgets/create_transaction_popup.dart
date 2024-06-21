@@ -7,6 +7,10 @@ import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
 
 class CreateTransactionPopup extends StatefulWidget {
+  final VoidCallback onTransactionCreated;
+
+  CreateTransactionPopup({required this.onTransactionCreated});
+
   @override
   State<CreateTransactionPopup> createState() => _CreateTransactionPopupState();
 }
@@ -167,7 +171,11 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
                   dateController.text,
                   noteController.text,
                 );
-
+                var oldState = context.read<AppCubit>().state;
+                context
+                    .read<AppCubit>()
+                    .updateState(oldState.copyWith(newSubmission: true));
+                widget.onTransactionCreated();
                 Navigator.pop(context);
               },
               child: Text("Create"),
