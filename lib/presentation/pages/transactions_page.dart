@@ -42,7 +42,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     });
   }
 
-  _refreshTransactions() {
+  _refreshTransactions() async {
     setState(() {
       _transactions = filteredTransactionsRepo.getTransactions(
           _token!, _searchController.text);
@@ -202,7 +202,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 ),
                               ),
                               TextButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/data/models/brand_model.dart';
 import 'package:hisabi_mobile_flutter/domain/brands_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
+import 'package:hisabi_mobile_flutter/presentation/helper_widgets/create_brand_popup.dart';
 
 class BrandsPage extends StatefulWidget {
   @override
@@ -35,6 +36,12 @@ class _BrandsPageState extends State<BrandsPage> {
   }
 
   void queryListener() {
+    setState(() {
+      _brands = filteredBrandsRepo.getBrands(_token!, _searchController.text);
+    });
+  }
+
+  _refreshBrands() {
     setState(() {
       _brands = filteredBrandsRepo.getBrands(_token!, _searchController.text);
     });
@@ -194,7 +201,16 @@ class _BrandsPageState extends State<BrandsPage> {
                                 ),
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return CreateBrandPopup(
+                                          onBrandCreated: _refreshBrands,
+                                        );
+                                      },
+                                    );
+                                  },
                                   child: const Text("CREATE BRAND")),
                             ],
                           ),

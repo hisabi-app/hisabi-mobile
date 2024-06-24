@@ -163,7 +163,7 @@ class _CreateTransactionPopupState extends State<CreateTransactionPopup> {
             ),
             SizedBox(height: height * 0.02),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 createTransactionRepo.createOrUpdateTransaction(
                   token,
                   double.parse(amountController.text),
