@@ -76,7 +76,7 @@ void main() {
 
       //act
       final response =
-          await repo.createorUpdateCategory(token, name, type, color);
+          await repo.createOrUpdateCategory(token, name, type, color);
       Map<String, dynamic> expectedResponse = {
         "id": "7",
         "name": "another test category",

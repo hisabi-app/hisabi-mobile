@@ -19,7 +19,7 @@ class CreateBrandPopup extends StatefulWidget {
 class _CreateBrandPopupState extends State<CreateBrandPopup> {
   String? selectedCategory;
   final brandNameController = TextEditingController();
-  final categoryController = TextEditingController();
+  // final categoryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

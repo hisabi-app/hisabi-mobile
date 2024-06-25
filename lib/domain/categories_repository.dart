@@ -6,14 +6,14 @@ abstract class CategoriesQueryRepo {
 }
 
 abstract class CategoriesMutationRepo {
-  Future<dynamic> createorUpdateCategory(
+  Future<dynamic> createOrUpdateCategory(
       String token, String name, String type, String color);
 }
 
 class CreateCategoryRepo implements CategoriesMutationRepo {
   final dio = Dio();
   @override
-  Future<dynamic> createorUpdateCategory(
+  Future<dynamic> createOrUpdateCategory(
       String token, String name, String type, String color) async {
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/categories_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
+import 'package:hisabi_mobile_flutter/presentation/helper_widgets/create_category_popup.dart';
 
 class CategoriesPage extends StatefulWidget {
   @override
@@ -36,6 +37,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   void queryListener() {
     setState(() {
+      _categories =
+          filteredCategoriesRepo.getCategories(_token!, _searchController.text);
+    });
+  }
+
+  _refreshCategories() async {
+    setState(() async {
       _categories =
           filteredCategoriesRepo.getCategories(_token!, _searchController.text);
     });
@@ -194,7 +202,16 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                 ),
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return CreateCategoryPopup(
+                                          onCategoryCreated: _refreshCategories,
+                                        );
+                                      },
+                                    );
+                                  },
                                   child: const Text("CREATE CATEGORY")),
                             ],
                           ),
