@@ -56,7 +56,7 @@ class DashboardPage extends StatelessWidget {
                                 ),
                                 Text(
                                   "AED ${snapshot.data!.round() / 1000}k",
-                                  style: TextStyle(fontSize: 50),
+                                  style: TextStyle(fontSize: 40),
                                 )
                               ],
                             ),
@@ -93,7 +93,7 @@ class DashboardPage extends StatelessWidget {
                                 ),
                                 Text(
                                   "AED ${snapshot.data.round() / 1000}k",
-                                  style: TextStyle(fontSize: 50),
+                                  style: TextStyle(fontSize: 40),
                                 )
                               ],
                             ),
@@ -130,7 +130,7 @@ class DashboardPage extends StatelessWidget {
                                 ),
                                 Text(
                                   "AED ${snapshot.data!.round() / 1000}k",
-                                  style: TextStyle(fontSize: 50),
+                                  style: TextStyle(fontSize: 40),
                                 )
                               ],
                             ),
@@ -168,7 +168,7 @@ class DashboardPage extends StatelessWidget {
                                 ),
                                 Text(
                                   "AED ${snapshot.data[0].round()}k",
-                                  style: TextStyle(fontSize: 50),
+                                  style: TextStyle(fontSize: 40),
                                 )
                               ],
                             ),
@@ -206,7 +206,7 @@ class DashboardPage extends StatelessWidget {
                                 ),
                                 Text(
                                   "AED ${snapshot.data[0].round()}k",
-                                  style: TextStyle(fontSize: 50),
+                                  style: TextStyle(fontSize: 40),
                                 )
                               ],
                             ),
