@@ -64,6 +64,16 @@ class SignInForm extends StatelessWidget {
                     emailController.text,
                     passwordController.text,
                   );
+                  print("test token ${token}");
+                  if (token.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Invalid username or password"),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
                   update(token);
                   final oldState = context.read<AppCubit>().state;
                   context.read<AppCubit>().updateState(
