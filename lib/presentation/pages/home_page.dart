@@ -2,10 +2,12 @@ import 'package:hisabi_mobile_flutter/domain/sms_repository.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/brands_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/categories_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:hisabi_mobile_flutter/presentation/pages/landing_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/sms_parser.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,6 +26,17 @@ class _HomePageState extends State<HomePage> {
     CategoriesPage(),
     SMSParserPage(smsRepository: TelephonyRepository()),
   ];
+
+  Future<void> _logout(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // Clear all stored user data
+
+    // Navigate back to the login screen
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LandingPage()),
+    );
+  }
 
   final navigationBarItems = const [
     BottomNavigationBarItem(label: "Dashbord", icon: Icon(Icons.dashboard)),
@@ -51,7 +64,41 @@ class _HomePageState extends State<HomePage> {
       'assets/logo.svg',
     );
     return Scaffold(
-      appBar: AppBar(leadingWidth: width * 0.95, leading: logo),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            SizedBox(
+              height: height * 0.15,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                ),
+                child: const Text(
+                  "Settings Menu",
+                  style: TextStyle(fontWeight: FontWeight.w100, fontSize: 30),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text("Logout"),
+              onTap: () => _logout(context), // Call logout function
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: true, // Ensures the drawer icon appears
+        title: Row(
+          children: [
+            SizedBox(
+              width: width * 0.14,
+            ),
+            SvgPicture.asset('assets/logo.svg', height: height * 0.05),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: navigationBarItems,
         showUnselectedLabels: true,
