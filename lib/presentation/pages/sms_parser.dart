@@ -79,6 +79,10 @@ class SMSParserPage extends StatelessWidget {
                                   width: width * 0.2,
                                 ),
                                 Text(element.address),
+                                SizedBox(
+                                  width: width * 0.2,
+                                ),
+                                Text(element.body),
                               ],
                             );
                           }).toList(),
