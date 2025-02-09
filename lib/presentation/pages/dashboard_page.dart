@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/domain/dashboard_repository.dart';
@@ -162,14 +163,25 @@ class DashboardPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                LineChart(
+                                  LineChartData(
+                                    minX: 60,
+                                    minY: 80,
+                                    lineBarsData: [
+                                      LineChartBarData(),
+                                    ],
+                                  ),
+
+                                  // Optional
+                                ),
                                 Text(
                                   "Total Income",
                                   style: TextStyle(color: Colors.grey[700]),
                                 ),
                                 Text(
                                   "AED ${snapshot.data[0].round()}k",
-                                  style: TextStyle(fontSize: 40),
-                                )
+                                  style: const TextStyle(fontSize: 40),
+                                ),
                               ],
                             ),
                           );
