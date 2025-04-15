@@ -188,3 +188,49 @@ linux/.idea/
 
 # Ignore assets if not needed
 # assets/large_image.png
+# Flutter/Dart related
+.dart_tool/
+.packages
+.pub-cache/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+
+# iOS
+ios/Flutter/
+ios/Pods/
+ios/Podfile.lock
+ios/.symlinks/
+ios/Runner.xcworkspace/xcuserdata/
+ios/Runner.xcodeproj/xcuserdata/
+
+# Android
+android/.gradle/
+android/.idea/
+android/local.properties
+android/app/build/
+android/gradle/
+android/*.iml
+
+# Windows
+windows/flutter/ephemeral/
+windows/build/
+
+# macOS
+macos/Flutter/ephemeral/
+macos/build/
+
+# Web
+web/.dart_tool/
+web/build/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Other
+*.log
+*.lock
+*.tmp
