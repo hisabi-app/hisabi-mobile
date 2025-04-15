@@ -234,3 +234,6 @@ web/build/
 *.log
 *.lock
 *.tmp
+
+windows/flutter/
+
