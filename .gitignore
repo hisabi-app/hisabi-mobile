@@ -1,0 +1,190 @@
+# iOS build output
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/App.framework
+ios/Flutter/engine/
+
+# Xcode project files that regenerate
+ios/Pods/
+ios/Podfile.lock
+ios/.symlinks/
+ios/Runner.xcworkspace/xcuserdata/
+ios/Runner.xcodeproj/xcuserdata/
+
+# Flutter intermediate and build files
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.dart_tool/
+build/
+
+# IDE stuff
+.idea/
+.vscode/
+
+
+**/.dart_tool/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.idea/
+**/.vscode/
+**/build/
+**/ios/Flutter/*
+**/macos/Flutter/*
+**/linux/flutter/*
+**/*.xcworkspace/xcshareddata/*
+.metadata
+*.iml
+# Android build artifacts
+/android/.gradle/
+/android/build/
+/android/app/build/
+
+
+# Flutter/Dart specific
+/.flutter-plugins
+/.flutter-plugins-dependencies
+.dart_tool/
+/build/
+
+# Android
+android/.gradle/
+/android/app/build/
+/android/.idea/
+/android/local.properties
+
+# iOS
+ios/.flutter-plugins
+ios/.flutter-plugins-dependencies
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/.idea/
+/ios/build/
+
+# IDE and OS specific
+.vscode/
+.idea/
+/*.iml
+*.swp
+Thumbs.db
+.DS_Store
+
+# Generated files
+*.g.dart
+
+# Flutter lock file (optional)
+pubspec.lock
+
+# macOS specific
+macos/Flutter/Flutter.framework
+macos/Pods/
+/macos/.idea/
+
+# Windows specific
+windows/build/
+windows/.idea/
+
+# Linux specific
+linux/build/
+linux/.idea/
+
+# Ignore assets if not needed
+# assets/large_image.png
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Flutter/Dart specific
+/.flutter-plugins
+/.flutter-plugins-dependencies
+.dart_tool/
+/build/
+
+# Android
+android/.gradle/
+/android/app/build/
+/android/.idea/
+/android/local.properties
+
+# iOS
+ios/.flutter-plugins
+ios/.flutter-plugins-dependencies
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/.idea/
+/ios/build/
+
+# IDE and OS specific
+.vscode/
+.idea/
+/*.iml
+*.swp
+Thumbs.db
+.DS_Store
+
+# Generated files
+*.g.dart
+
+# Flutter lock file (optional)
+pubspec.lock
+
+# macOS specific
+macos/Flutter/Flutter.framework
+macos/Pods/
+/macos/.idea/
+
+# Windows specific
+windows/build/
+windows/.idea/
+
+# Linux specific
+linux/build/
+linux/.idea/
+
+# Ignore assets if not needed
+# assets/large_image.png
