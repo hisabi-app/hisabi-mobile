@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class DashboardChartCard extends StatelessWidget {
   final String title;
   final double value;
-  final Map<String, dynamic> chartData;
+  final List<Map<String, dynamic>> chartData;
 
   const DashboardChartCard({
     required this.title,
@@ -36,11 +36,13 @@ class DashboardChartCard extends StatelessWidget {
                 lineBarsData: [
                   LineChartBarData(
                     spots:
-                        chartData.entries
+                        chartData
+                            .asMap()
+                            .entries
                             .map(
-                              (e) => FlSpot(
-                                double.tryParse(e.key) ?? 0,
-                                double.tryParse(e.value.toString()) ?? 0,
+                              (entry) => FlSpot(
+                                entry.key.toDouble(), // X as index
+                                (entry.value["value"] as num).toDouble(), // Y
                               ),
                             )
                             .toList(),

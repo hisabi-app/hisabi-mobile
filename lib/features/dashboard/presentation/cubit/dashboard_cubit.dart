@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/data/dashboard_repository.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_state.dart';
@@ -47,13 +49,11 @@ class DashboardCubit extends Cubit<DashboardState> {
         1,
       );
       dashboardMap["totalExpensesTrend"] = await repo.getTotalExpensesTrend(
-        "current-month",
+        "current-year",
         1,
       );
-      dashboardMap["totalIncomeTrend"] = await repo.getTotalIncomeTrend(
-        "current-month",
-        1,
-      );
+      final response = await repo.getTotalIncomeTrend("current-year", 1);
+      dashboardMap["totalIncomeTrend"] = response;
       dashboardMap["totalIncome"] = await repo.getTotalIncome(
         "current-month",
         1,

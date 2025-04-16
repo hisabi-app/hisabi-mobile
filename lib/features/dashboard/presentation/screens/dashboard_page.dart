@@ -72,10 +72,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   SizedBox(height: height * 0.02),
 
                   /// Total Income Card with Chart
-                  DashboardChartCard(
+                  DashboardCard(
                     title: "Total Income",
                     value: data["totalIncome"]?[0]?.toDouble() ?? 0,
-                    chartData: data["totalIncomeTrend"] ?? {},
                   ),
 
                   SizedBox(height: height * 0.02),
@@ -87,8 +86,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
 
                   /// Continue with rest...
-                  Text("Total Income Trend"),
-                  Text("Total Expenses Trend"),
+                  DashboardChartCard(
+                    title: "Total Income Trend",
+                    value:
+                        (data["totalIncomeTrend"]?.last["value"] ?? 0)
+                            .toDouble(),
+                    chartData: data["totalIncomeTrend"] ?? [],
+                  ),
+                  DashboardChartCard(
+                    title: "Total Expenses Trend",
+                    value:
+                        (data["totalExpensesTrend"]?.last["value"] ?? 0)
+                            .toDouble(),
+                    chartData: data["totalExpensesTrend"] ?? [],
+                  ),
+
                   Text(
                     "Categories Analytics",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),

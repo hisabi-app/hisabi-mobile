@@ -380,7 +380,34 @@ class DashboardRepo {
     }
   }
 
-  Future<dynamic> getTotalExpensesTrend(range, id) async {
+  // Future<dynamic> getTotalExpensesTrend(range, id) async {
+  //   final String? token = await secureStorage.read(key: 'token');
+  //   try {
+  //     Options options = Options(headers: {"Authorization": "Bearer $token"});
+  //     final response = await dio.post(
+  //       "https://finance-demo.saleem.dev/graphql",
+  //       data: {"query": "query {totalExpensesTrend (range:\"${range}\")}"},
+  //       options: options,
+  //     );
+  //     final jsonData = response.data["data"]["totalExpensesTrend"];
+  //     print(jsonData);
+  //     // Parse the JSON string
+  //     List<dynamic> jsonArray = json.decode(jsonData);
+  //     Map<String, dynamic> jsonMap = {};
+  //     jsonArray.forEach((element) {
+  //       print("${element["label"]} ${element["value"]}");
+  //       jsonMap[element["label"]] = element["value"];
+  //     });
+
+  //     print(jsonMap);
+  //     return jsonMap;
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return Map();
+  //   }
+  // }
+
+  Future<List<Map<String, dynamic>>> getTotalExpensesTrend(range, id) async {
     final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
@@ -391,23 +418,23 @@ class DashboardRepo {
       );
       final jsonData = response.data["data"]["totalExpensesTrend"];
       print(jsonData);
-      // Parse the JSON string
-      List<dynamic> jsonArray = json.decode(jsonData);
-      Map<String, dynamic> jsonMap = {};
+
+      // Parse the JSON string into a List of Maps
+      List<dynamic> jsonArray = json.decode(
+        jsonData,
+      ); // decoding the string into a List
+      List<Map<String, dynamic>> chartData = [];
       jsonArray.forEach((element) {
-        print("${element["label"]} ${element["value"]}");
-        jsonMap[element["label"]] = element["value"];
+        chartData.add({"label": element["label"], "value": element["value"]});
       });
 
-      print(jsonMap);
-      return jsonMap;
+      return chartData;
     } catch (e) {
-      print(e.toString());
-      return Map();
+      throw Exception('Failed to load total Expenses trend: $e');
     }
   }
 
-  Future<dynamic> getTotalIncomeTrend(range, id) async {
+  Future<List<Map<String, dynamic>>> getTotalIncomeTrend(range, id) async {
     final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
@@ -418,19 +445,19 @@ class DashboardRepo {
       );
       final jsonData = response.data["data"]["totalIncomeTrend"];
       print(jsonData);
-      // Parse the JSON string
-      List<dynamic> jsonArray = json.decode(jsonData);
-      Map<String, dynamic> jsonMap = {};
+
+      // Parse the JSON string into a List of Maps
+      List<dynamic> jsonArray = json.decode(
+        jsonData,
+      ); // decoding the string into a List
+      List<Map<String, dynamic>> chartData = [];
       jsonArray.forEach((element) {
-        print("${element["label"]} ${element["value"]}");
-        jsonMap[element["label"]] = element["value"];
+        chartData.add({"label": element["label"], "value": element["value"]});
       });
 
-      print(jsonMap);
-      return jsonMap;
+      return chartData;
     } catch (e) {
-      print(e.toString());
-      return Map();
+      throw Exception('Failed to load total income trend: $e');
     }
   }
 
