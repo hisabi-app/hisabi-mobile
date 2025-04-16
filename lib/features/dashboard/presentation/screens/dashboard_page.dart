@@ -4,9 +4,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/data/dashboard_repository.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_state.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/combined_card.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/overview_card.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/dashboard_card.dart';
 import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/dashboard_chart_card.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_state.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_state.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -18,7 +30,6 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<DashboardCubit>().loadInitialData();
   }
@@ -34,91 +45,170 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is DashboardLoaded) {
           final data = state.data;
-          return SizedBox(
-            height: height * .8,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: height * 0.02),
-                  Text(
-                    "Account Overview",
-                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 30),
-                  ),
-                  SizedBox(height: height * 0.02),
 
-                  /// Net Worth Card
-                  DashboardCard(
-                    title: "Net Worth",
-                    value: data["netWorth"]?.round()?.toDouble() ?? 0,
+          return SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 12),
+                Center(
+                  child: const Text(
+                    "Net Worth",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
+                ),
+                const SizedBox(height: 8),
 
-                  SizedBox(height: height * 0.02),
+                /// Row layout for Net Worth + 5 items
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /// Net Worth Block
+                    Expanded(
+                      // flex: 2,
+                      child: Container(
+                        // padding: const EdgeInsets.all(8),
+                        height: 136,
+                        margin: EdgeInsets.symmetric(vertical: 0),
+                        padding: EdgeInsets.symmetric(vertical: 0),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Net Worth',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white70,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 2),
 
-                  /// Total Cash Card
-                  DashboardCard(
-                    title: "Total Cash",
-                    value: data["totalCash"]?.round()?.toDouble() ?? 0,
-                  ),
+                            Text(
+                              (data["netWorth"]?.round()?.toDouble() ?? 0)
+                                  .toStringAsFixed(0),
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.currency_exchange,
+                                  color: Colors.white70,
+                                  size: 12,
+                                ),
+                                SizedBox(width: 2),
+                                Text(
+                                  'AED',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
 
-                  SizedBox(height: height * 0.02),
+                    /// Cash, Savings, Investments
+                    SizedBox(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
 
-                  /// Total Investment Card
-                  DashboardCard(
-                    title: "Total Investment",
-                    value: data["totalInvestment"]?.round()?.toDouble() ?? 0,
-                  ),
+                        children: [
+                          OverviewItemCard(
+                            title: "Cash",
+                            value: data["totalCash"]?.toDouble() ?? 0,
+                            color: Colors.teal,
+                            height: 45.333,
+                            width: 100,
+                            fontSize: 14,
+                          ),
+                          OverviewItemCard(
+                            title: "Savings",
+                            value: data["totalSavings"]?.toDouble() ?? 0,
+                            color: Colors.deepPurple,
+                            width: 100,
 
-                  SizedBox(height: height * 0.02),
+                            height: 45.333,
+                            fontSize: 14,
+                          ),
+                          OverviewItemCard(
+                            title: "Investments",
+                            value: data["totalInvestment"]?.toDouble() ?? 0,
+                            color: Colors.indigo,
+                            height: 45.333,
+                            width: 100,
 
-                  /// Total Income Card with Chart
-                  DashboardCard(
-                    title: "Total Income",
-                    value: data["totalIncome"]?[0]?.toDouble() ?? 0,
-                  ),
+                            fontSize: 14,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
 
-                  SizedBox(height: height * 0.02),
+                    /// Income & Expenses
+                    SizedBox(
+                      width: width * .32,
+                      child: Expanded(
+                        flex: 2,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            OverviewItemCard(
+                              title: "Income",
+                              value: data["totalIncome"]?[0]?.toDouble() ?? 0.0,
+                              color: Colors.green,
+                              height: 68,
+                              width: 200,
+                              fontSize: 20,
+                            ),
+                            OverviewItemCard(
+                              title: "Expenses",
+                              value:
+                                  data["totalExpenses"]?[0]?.toDouble() ?? 0.0,
+                              color: Colors.red,
+                              width: 200,
+                              height: 68,
+                              fontSize: 20,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
 
-                  /// Total Expenses Card
-                  DashboardCard(
-                    title: "Total Expenses",
-                    value: data["totalExpenses"]?[0]?.toDouble() ?? 0,
+                const SizedBox(height: 30),
+                Center(
+                  child: const Text(
+                    "Income VS Expenses",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
+                ),
+                const SizedBox(height: 15),
 
-                  /// Continue with rest...
-                  DashboardChartCard(
-                    title: "Total Income Trend",
-                    value:
-                        (data["totalIncomeTrend"]?.last["value"] ?? 0)
-                            .toDouble(),
-                    chartData: data["totalIncomeTrend"] ?? [],
-                  ),
-                  DashboardChartCard(
-                    title: "Total Expenses Trend",
-                    value:
-                        (data["totalExpensesTrend"]?.last["value"] ?? 0)
-                            .toDouble(),
-                    chartData: data["totalExpensesTrend"] ?? [],
-                  ),
-
-                  Text(
-                    "Categories Analytics",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                  Text(
-                    "Brands Analytics",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                  Text(
-                    "Facts",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                  Text(
-                    "Visualization",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                ],
-              ),
+                /// Combined Income/Expense Chart
+                DashboardCombinedChart(
+                  incomeData: data["totalIncomeTrend"] ?? [],
+                  expenseData: data["totalExpensesTrend"] ?? [],
+                  height: height * 0.25,
+                ),
+              ],
             ),
           );
         } else if (state is DashboardError) {

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hisabi_mobile_flutter/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:hisabi_mobile_flutter/features/authentication/presentation/cubit/auth_state.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
-import 'package:hisabi_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/dashboard_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:hisabi_mobile_flutter/features/authentication/presentation/screens/login_screen.dart';
 import 'package:hisabi_mobile_flutter/features/authentication/presentation/screens/signup_page.dart';

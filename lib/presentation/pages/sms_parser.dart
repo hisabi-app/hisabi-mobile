@@ -2,16 +2,8 @@
 // import 'package:hisabi_mobile_flutter/data/models/sms_model.dart';
 // import 'package:flutter/material.dart';
 // import 'package:hisabi_mobile_flutter/presentation/pages/update_bank_list.dart';
-// import 'package:telephony/telephony.dart';
 
 // class SMSParserPage extends StatelessWidget {
-//   final route = MaterialPageRoute(
-//       builder: (context) => SMSParserPage(
-//             smsRepository: TelephonyRepository(),
-//           ));
-//   SMSParserPage({required this.smsRepository});
-
-//   final SmsRepository smsRepository;
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -34,7 +26,7 @@
 //           ),
 //           Expanded(
 //             child: FutureBuilder(
-//               future: smsRepository.fetchFromInbox(),
+//               future: ,
 //               builder: (context, snapshot) {
 //                 if (snapshot.connectionState == ConnectionState.waiting) {
 //                   return CircularProgressIndicator(); // Show loading indicator
