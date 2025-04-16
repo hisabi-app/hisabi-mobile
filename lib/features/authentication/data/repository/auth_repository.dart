@@ -11,6 +11,30 @@ class AuthRepository {
   );
   final _storage = FlutterSecureStorage();
 
+  Future<dynamic> checkIfLoggedIn() async {
+    // Check if the user is logged in by checking the token or the login state
+    final token = await _storage.read(key: 'token');
+    final email = await _storage.read(key: "email");
+    final password = await _storage.read(key: "password");
+    final remember = await _storage.read(key: "remember");
+    print("$token $email $remember $password inside repo");
+
+    if (token != null &&
+        token.isNotEmpty &&
+        email!.isNotEmpty &&
+        email != null &&
+        remember!.isNotEmpty &&
+        remember != null &&
+        password!.isNotEmpty &&
+        password != null) {
+      print(true);
+      return [email, password];
+    } else {
+      print(false);
+      return false;
+    }
+  }
+
   Future<String> getDeviceName() async {
     final deviceInfo = DeviceInfoPlugin();
 
@@ -44,17 +68,18 @@ class AuthRepository {
             },
           )
           .then((value) => loginToken = value.toString());
+      await _storage.write(key: "token", value: loginToken);
+      if (remember) {
+        print("repo remember $remember $email $password");
+        await _storage.write(key: "email", value: email);
+        await _storage.write(key: "password", value: password);
+        await _storage.write(key: "remember", value: remember.toString());
+      }
     } catch (e) {
       print(e.toString());
     }
     print(loginToken);
     return loginToken;
-  }
-
-  Future<bool> checkIfLoggedIn() async {
-    // Check if the user is logged in by checking the token or the login state
-    final token = await _storage.read(key: 'access_token');
-    return token != null && token.isNotEmpty;
   }
 
   Future<void> logout() async {

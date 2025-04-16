@@ -25,4 +25,24 @@ class AuthCubit extends Cubit<AuthState> {
       return false;
     }
   }
+
+  Future<void> checkIfLoggedIn() async {
+    emit(AuthInitial());
+
+    try {
+      final result = await repository.checkIfLoggedIn();
+
+      if (result != false && result is List && result.length == 2) {
+        final email = result[0];
+        final password = result[1];
+        await login(email, password, true); // Important: Await login
+        print("Auto-login succeeded");
+      } else {
+        print("No saved credentials");
+      }
+    } catch (e) {
+      debugPrint("checkIfLoggedIn error: ${e.toString()}");
+      emit(AuthError("Auto-login failed: ${e.toString()}"));
+    }
+  }
 }
