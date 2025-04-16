@@ -86,8 +86,7 @@ class AuthRepository {
     // Clear stored credentials on logout
     await _storage.delete(key: 'email');
     await _storage.delete(key: 'password');
-    await _storage.delete(key: 'access_token');
-    await _storage.delete(key: 'is_logged_in');
-    await _storage.delete(key: 'tenant');
+    await _storage.delete(key: 'token');
+    await _storage.write(key: 'remember', value: false.toString());
   }
 }

@@ -7,6 +7,12 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.repository) : super(AuthInitial());
   final AuthRepository repository;
 
+  Future<void> logout() async {
+    emit(AuthLoading());
+    repository.logout();
+    emit(AuthInitial());
+  }
+
   Future<bool> login(String email, String password, bool remember) async {
     final deviceName = await repository.getDeviceName();
     try {

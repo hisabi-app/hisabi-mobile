@@ -1,7 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hisabi_mobile_flutter/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
@@ -70,8 +72,7 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _logout(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    context.go('/dashboard'); // <-- Use GoRouter navigation
+    context.read<AuthCubit>().logout();
+    context.go('/');
   }
 }

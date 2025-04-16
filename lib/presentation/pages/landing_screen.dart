@@ -36,7 +36,7 @@ class _LandingScreenState extends State<LandingScreen> {
             () => context.go('/dashboard'),
           ); // Navigate to Dashboard if authenticated
           return Container();
-        } else if (state is AuthLoading || state is AuthInitial) {
+        } else if (state is AuthLoading) {
           return Center(child: CircularProgressIndicator());
         } else {
           print("what the hell is this state? $state");
