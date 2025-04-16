@@ -1,22 +1,21 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-abstract class DashboardRepo {
-  Future<dynamic> getQuery(String token, range, id);
-}
-
-class FinanceVisualizationCirclePackMetricRepo implements DashboardRepo {
+class DashboardRepo {
   Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  FlutterSecureStorage secureStorage = FlutterSecureStorage();
+
+  Future<dynamic> getFinanceVisualization(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {financeVisualizationCirclePackMetric (range:\"${range}\")}"
+              "query {financeVisualizationCirclePackMetric (range:\"${range}\")}",
         },
         options: options,
       );
@@ -39,12 +38,9 @@ class FinanceVisualizationCirclePackMetricRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class AverageValueTransactionRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getAvgValueTrn(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -69,19 +65,16 @@ class AverageValueTransactionRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TransactionsStandardDeviationRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, category_id) async {
+  Future<dynamic> getTrnStd(range, category_id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {transactionsStandardDeviation (range:\"${range}\", id:${category_id})}"
+              "query {transactionsStandardDeviation (range:\"${range}\", id:${category_id})}",
         },
         options: options,
       );
@@ -102,12 +95,9 @@ class TransactionsStandardDeviationRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class LowestValueTransactionRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getLowestValueTransaction(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -132,12 +122,9 @@ class LowestValueTransactionRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class HighestValueTransactionRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getHighestValueTransaction(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -162,19 +149,16 @@ class HighestValueTransactionRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class NumberOfTransactionsPerBrandRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getNoOfTransactionsPerBrand(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {numberOfTransactionsPerBrand (range:\"${range}\", id:${id})}"
+              "query {numberOfTransactionsPerBrand (range:\"${range}\", id:${id})}",
         },
         options: options,
       );
@@ -195,19 +179,16 @@ class NumberOfTransactionsPerBrandRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class NumberOfTransactionsPerCategoryRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getNoOfTrnPerCategory(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {numberOfTransactionsPerCategory (range:\"${range}\")}"
+              "query {numberOfTransactionsPerCategory (range:\"${range}\")}",
         },
         options: options,
       );
@@ -228,18 +209,15 @@ class NumberOfTransactionsPerCategoryRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TotalPerBrandTrendRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalPerBrandTrend(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
-          "query": "query {totalPerBrandTrend (range:\"${range}\", id:${id})}"
+          "query": "query {totalPerBrandTrend (range:\"${range}\", id:${id})}",
         },
         options: options,
       );
@@ -260,12 +238,9 @@ class TotalPerBrandTrendRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class NumberOfTransactionsRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getNoOfTrn(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -290,19 +265,16 @@ class NumberOfTransactionsRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TotalPerBrandRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, category_id) async {
+  Future<dynamic> getTotalPerBrand(range, category_id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {totalPerBrand (range:\"${range}\", category_id:${category_id})}"
+              "query {totalPerBrand (range:\"${range}\", category_id:${category_id})}",
         },
         options: options,
       );
@@ -323,19 +295,16 @@ class TotalPerBrandRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TotalPerCategoryTrendRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getQueryTotalPerCategoryTrend(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
         "https://finance-demo.saleem.dev/graphql",
         data: {
           "query":
-              "query {totalPerCategoryTrend (range:\"${range}\", id:${id})}"
+              "query {totalPerCategoryTrend (range:\"${range}\", id:${id})}",
         },
         options: options,
       );
@@ -356,12 +325,9 @@ class TotalPerCategoryTrendRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class IncomePerCategoryRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getIncomePerCategory(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -386,12 +352,9 @@ class IncomePerCategoryRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class ExpensesPerCategoryRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getExpensesPerCategory(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -416,12 +379,9 @@ class ExpensesPerCategoryRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TotalExpensesTrendRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalExpensesTrend(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -446,12 +406,9 @@ class TotalExpensesTrendRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TotalIncomeTrendRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalIncomeTrend(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -476,12 +433,9 @@ class TotalIncomeTrendRepo implements DashboardRepo {
       return Map();
     }
   }
-}
 
-class TotalIncomeRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalIncome(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -506,12 +460,9 @@ class TotalIncomeRepo implements DashboardRepo {
       return 0;
     }
   }
-}
 
-class TotalExpensesRepo implements DashboardRepo {
-  Dio dio = Dio();
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalExpenses(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -536,13 +487,9 @@ class TotalExpensesRepo implements DashboardRepo {
       return 0;
     }
   }
-}
 
-class TotalInvestmentRepo implements DashboardRepo {
-  Dio dio = Dio();
-
-  @override
-  Future<double> getQuery(String token, range, id) async {
+  Future<double> getTotalInvestment(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -566,13 +513,9 @@ class TotalInvestmentRepo implements DashboardRepo {
       return 0; // Return an empty list in case of failure
     }
   }
-}
 
-class TotalCashRepo implements DashboardRepo {
-  Dio dio = Dio();
-
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalCash(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -596,13 +539,9 @@ class TotalCashRepo implements DashboardRepo {
       return 0; // Return an empty list in case of failure
     }
   }
-}
 
-class TotalSavingsRepo implements DashboardRepo {
-  Dio dio = Dio();
-
-  @override
-  Future<dynamic> getQuery(String token, range, id) async {
+  Future<dynamic> getTotalSavings(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(
@@ -626,13 +565,9 @@ class TotalSavingsRepo implements DashboardRepo {
       return 0; // Return an empty list in case of failure
     }
   }
-}
 
-class NetWorthRepo implements DashboardRepo {
-  Dio dio = Dio();
-
-  @override
-  Future<double> getQuery(String token, range, id) async {
+  Future<double> getNetWorth(range, id) async {
+    final String? token = await secureStorage.read(key: 'token');
     try {
       Options options = Options(headers: {"Authorization": "Bearer $token"});
       final response = await dio.post(

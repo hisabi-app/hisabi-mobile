@@ -1,10 +1,12 @@
 import 'package:hisabi_mobile_flutter/features/authentication/data/repository/auth_repository.dart';
 import 'package:hisabi_mobile_flutter/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/data/dashboard_repository.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_cubit.dart';
 import 'package:hisabi_mobile_flutter/presentation/cubit/app_state.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/brands_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/categories_page.dart';
-import 'package:hisabi_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/dashboard_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/landing_screen.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
@@ -20,6 +22,7 @@ void main() async {
     MultiProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit(AuthRepository())),
+        BlocProvider(create: (context) => DashboardCubit(DashboardRepo())),
       ],
       child: MyApp(),
     ),

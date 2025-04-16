@@ -3,7 +3,7 @@ import 'package:hisabi_mobile_flutter/domain/signup_repository.dart';
 import 'package:hisabi_mobile_flutter/features/authentication/presentation/screens/login_screen.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/brands_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/categories_page.dart';
-import 'package:hisabi_mobile_flutter/presentation/pages/dashboard_page.dart';
+import 'package:hisabi_mobile_flutter/features/dashboard/presentation/screens/dashboard_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/home_page.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/landing_screen.dart';
 import 'package:hisabi_mobile_flutter/presentation/pages/transactions_page.dart';
